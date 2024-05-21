@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "privacy_by_design_principles",
+  "info": {
+    "singularName": "privacy-by-design-principle",
+    "pluralName": "privacy-by-design-principles",
+    "displayName": "Privacy By Design Principle",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "privacy_by_design_principles"
+    }
+  }
+}

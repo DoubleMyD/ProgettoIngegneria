@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "cwe_top_25_weaknesses",
+  "info": {
+    "singularName": "cwe-top-25-weakness",
+    "pluralName": "cwe-top-25-weaknesses",
+    "displayName": "CWE Top 25 Weakness"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "identificatore": {
+      "type": "string"
+    },
+    "weakness": {
+      "type": "text"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "cwe_top_25_weaknesses"
+    }
+  }
+}

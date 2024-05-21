@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "mvcs",
+  "info": {
+    "singularName": "mvc",
+    "pluralName": "mvcs",
+    "displayName": "MVC",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "collocazione": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "mvcs"
+    }
+  }
+}

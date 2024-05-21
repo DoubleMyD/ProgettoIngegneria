@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "strategias",
+  "info": {
+    "singularName": "strategia",
+    "pluralName": "strategias",
+    "displayName": "Strategia",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "strategias"
+    }
+  }
+}

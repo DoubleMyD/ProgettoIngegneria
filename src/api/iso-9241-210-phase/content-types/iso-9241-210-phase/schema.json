@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "iso_9241_210_phases",
+  "info": {
+    "singularName": "iso-9241-210-phase",
+    "pluralName": "iso-9241-210-phases",
+    "displayName": "ISO 9241-210 Phase"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "numero": {
+      "type": "decimal"
+    },
+    "nome": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "iso_9241_210_phases"
+    }
+  }
+}

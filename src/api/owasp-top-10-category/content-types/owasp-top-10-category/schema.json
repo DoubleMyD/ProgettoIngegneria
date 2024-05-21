@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "owasp_top_10_categories",
+  "info": {
+    "singularName": "owasp-top-10-category",
+    "pluralName": "owasp-top-10-categories",
+    "displayName": "OWASP Top 10 Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nome": {
+      "type": "string"
+    },
+    "patterns": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::pattern.pattern",
+      "inversedBy": "owasp_top_10_categories"
+    },
+    "identificatore": {
+      "type": "string"
+    }
+  }
+}
