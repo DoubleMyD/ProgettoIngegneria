@@ -12,7 +12,7 @@ export default class PatternController {
 
     async initialize() {
         const patterns = await this.model.fetchPatterns();
-        this.view.populateDropdown(patterns.data);
+        this.view.populateDropdown(patterns);
 
         this.view.patternSelect.addEventListener('change', async (event) => {
             const target = event.target;
