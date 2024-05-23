@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        #content {
+            width: 80%;
+            margin-top: 20px;
+        }
+        #pattern-info {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Service</h1>
+    <div id="content">
+        <label for="pattern-select">Choose a pattern:</label>
+        <select id="pattern-select">
+            <option value="">Select a pattern</option>
+        </select>
+        <div id="pattern-info">
+            <h2 id="pattern-name"></h2>
+            <p id="pattern-description"></p>
+            <p id="pattern-context"></p>
+            <p id="pattern-mvc"></p>
+            <p id="pattern-strategies"></p>
+            <p id="pattern-principles"></p>
+            <p id="pattern-owasp-categories"></p>
+            <p id="pattern-cwe-categories"></p>
+            <p id="pattern-gdpr-articles"></p>
+            <p id="pattern-iso-phases"></p>
+        </div>
+    </div>
+    <script type="module">
+        import PatternController from '../back-end/controllers/PatternController.js';
+       
+        document.addEventListener('DOMContentLoaded', () => {
+            new PatternController();
+        });
+    </script>
+</body>
+</html>
