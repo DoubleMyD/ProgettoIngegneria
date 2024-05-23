@@ -45,18 +45,15 @@
             <p id="pattern-owasp-categories"></p>
             <p id="pattern-cwe-categories"></p>
             <p id="pattern-gdpr-articles"></p>
-            <p id="pattern-iso-phases">SEAAAAA</p>
+            <p id="pattern-iso-phases"></p>
         </div>
     </div>
-    <script >
-        //import PatternController from './back-end/controllers/PatternController.js';
+    
+    <script type="module">
+        import PatternController from './back-end/controllers/PatternController.js';
        
-        document.addEventListener('DOMContentLoaded', async function() {
-            let string = "ciola";
-            this.patternInfo.style.display = 'block';
-
-            document.getElementById('pattern-mvc').textContent = string;
-           // new PatternController();
+        document.addEventListener('DOMContentLoaded', () => {
+          new PatternController();
         });
 
     </script>

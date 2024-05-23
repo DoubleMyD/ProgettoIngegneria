@@ -16,7 +16,6 @@ export default class PatternView {
     }
 
     populateDropdown(patterns) {
-        this.patternSelect.innerHTML = '<option value="">Select a pattern</option>';
         patterns.forEach(pattern => {
             const option = document.createElement('option');
             option.value = pattern.id;
@@ -25,7 +24,8 @@ export default class PatternView {
         });
     }
 
-    updatePatternDetails(patternData){
+    updateView(patternData){
+        this.patternInfo.style.display = 'block';
         this.displayPatternDetails(patternData);
         this.displayPatternMvc(patternData);
         this.displayPatternStrategies(patternData);

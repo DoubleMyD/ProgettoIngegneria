@@ -27,10 +27,10 @@ export default class PatternController {
         });
     }
 
-    updatePatternDetails(patternId){
+    async updatePatternDetails(patternId){
         try{
-            const patternData = this.model.fetchPatternDetails(patternId);
-            this.view.updatePatternDetails(patternData);
+            const pattern = await this.model.fetchPatternDetails(patternId);
+            this.view.updateView(pattern);
         }catch(error){
             console.error('Error fetching pattern details:', error);
         }
