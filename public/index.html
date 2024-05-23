@@ -49,11 +49,16 @@
         </div>
     </div>
     <script >
-        import PatternController from './back-end/controllers/PatternController.js';
+        //import PatternController from './back-end/controllers/PatternController.js';
        
         document.addEventListener('DOMContentLoaded', async function() {
-            new PatternController();
+            let string = "ciola";
+            this.patternInfo.style.display = 'block';
+
+            document.getElementById('pattern-mvc').textContent = string;
+           // new PatternController();
         });
+
     </script>
 </body>
 </html>

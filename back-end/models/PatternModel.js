@@ -5,12 +5,12 @@ export default class PatternModel {
     static async fetchPatterns() {
         const response = await fetch(PatternModel.apiUrl);
         const data = await response.json();
-        return data;
+        return data.data;
     }
 
     static async fetchPatternDetails(patternId) {
         const response = await fetch(`${PatternModel.apiUrl}/${patternId}?populate=*`);
         const data = await response.json();
-        return data.data;
+        return data;
     }
 }
