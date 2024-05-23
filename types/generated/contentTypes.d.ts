@@ -931,37 +931,6 @@ export interface ApiIso9241210PhaseIso9241210Phase
   };
 }
 
-export interface ApiLandingPageLandingPage extends Schema.SingleType {
-  collectionName: 'landing_pages';
-  info: {
-    singularName: 'landing-page';
-    pluralName: 'landing-pages';
-    displayName: 'Landing Page';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    icon: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::landing-page.landing-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::landing-page.landing-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiMvcMvc extends Schema.CollectionType {
   collectionName: 'mvcs';
   info: {
@@ -1189,7 +1158,6 @@ declare module '@strapi/types' {
       'api::cwe-top-25-weakness.cwe-top-25-weakness': ApiCweTop25WeaknessCweTop25Weakness;
       'api::example.example': ApiExampleExample;
       'api::iso-9241-210-phase.iso-9241-210-phase': ApiIso9241210PhaseIso9241210Phase;
-      'api::landing-page.landing-page': ApiLandingPageLandingPage;
       'api::mvc.mvc': ApiMvcMvc;
       'api::owasp-top-10-category.owasp-top-10-category': ApiOwaspTop10CategoryOwaspTop10Category;
       'api::pattern.pattern': ApiPatternPattern;

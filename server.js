@@ -11,7 +11,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/back-end', express.static(path.join(__dirname, 'back-end')));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'landing-page.html'));
 });
 
 app.listen(PORT, () => {
