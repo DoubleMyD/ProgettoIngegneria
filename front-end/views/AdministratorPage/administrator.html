@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 20px;
+        }
+
+        #content {
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        #pattern-info {
+            border: 1px solid #5a0f0f;
+            padding: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            max-width : 200px;
+            max-height: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            border: 1px solid black;
+        }
+        tr{
+            height: 100px;
+        }
+        tr:hover{
+            height: 250px;
+        }
+        td:hover {
+            overflow: auto;
+            white-space: normal;
+        }
+        .save-button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }/*
+        .dropdown {
+            position: absolute;
+            display: none;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+        .dropdown select {
+            border: none;
+            padding: 5px;
+            background-color: white;
+        }*/
+
+    </style>
+</head>
+
+<body>
+    <h1>Administrator !!!!!!</h1>
+    <div id="administrator-content">
+        <a href="/landing-page">
+            <img src="path-to-your-image.jpg" alt="landing-page">
+        </a>
+
+        <div id="patterns-content">
+            <div id="pattern-form"></div>
+            <button id="b-pattern" class="new-button">pattern</button>
+
+            <button id="togglePatternTable">Toggle Table Collapse</button>
+            <table id="pattern-table">Pattern
+                <tr>
+                    <th>Nome</th>
+                    <th>descrizione</th>
+                    <th>contesto</th>
+                    <th>mvcs</th>
+                    <th>strategies</th>
+                    <th>privacy Principles</th>
+                    <th>OWASP Category</th>
+                    <th>CWE Weaknesses</th>
+                    <th>GDPR Articles</th>
+                    <th>ISO 9241 210 Phases</th>
+                    <th>examples</th>
+                    <th>Search Counter</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="article-content">
+            <div id="article-form"></div>
+            <button id="b-article" class="new-button">article</button>
+
+            <button id="toggleArticleTable">Toggle Table Collapse</button>
+            <table id="article-table">Articles
+                <tr>
+                    <th>Numero</th>
+                    <th>nome</th>
+                    <th>patterns</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="CWE-content">
+            <div id="cwe-form"></div>
+            <button id="b-cwe" class="new-button">cwe</button>
+
+            <button id="toggleCWETable">Toggle Table Collapse</button>
+            <table id="CWE-table">CWE
+                <tr>
+                    <th>Identificatore</th>
+                    <th>Weaknesses</th>
+                    <th>patterns</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="ISO-content">
+            <div id="iso-form"></div>
+            <button id="b-iso" class="new-button">iso</button>
+
+            <button id="toggleISOTable">Toggle Table Collapse</button>
+            <table id="ISO-table">ISO
+                <tr>
+                    <th>Numero</th>
+                    <th>Nome</th>
+                    <th>patterns</th>
+                    <th>privacy Principles</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="MVC-content">
+            <div id="mvc-form"></div>
+            <button id="b-mvc" class="new-button">mvc</button>
+
+            <button id="toggleMVCTable">Toggle Table Collapse</button>
+            <table id="MVC-table">MVC
+                <tr>
+                    <th>Collocazione</th>
+                    <th>patterns</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="OWASP-content">
+            <div id="owasp-form"></div>
+            <button id="b-owasp" class="new-button">owasp</button>
+
+            <button id="toggleOWASPTable">Toggle Table Collapse</button>
+            <table id="OWASP-table">OWASP
+                <tr>
+                    <th>Identificatore</th>
+                    <th>Nome</th>
+                    <th>patterns</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Privacy-content">
+            <div id="privacy-form"></div>
+            <button id="b-privacy" class="new-button">privacy</button>
+
+            <button id="togglePrivacyTable">Toggle Table Collapse</button>
+            <table id="Privacy-table">Privacy
+                <tr>
+                    <th>Nome</th>
+                    <th>patterns</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="Strategy-content">
+            <div id="strategy-form"></div>
+            <button id="b-strategy" class="new-button">strategy</button>
+
+            <button id="toggleStrategyTable">Toggle Table Collapse</button>
+            <table id="Strategy-table">Strategy
+                <tr>
+                    <th>Nome</th>
+                    <th>patterns</th>
+                    <th>Privacy By Design Principles</th>
+                    <th>GDPR Articles</th>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+
+    <script type="module">
+        import AdministratorController from '././front-end/controllers/AdministratorController.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new AdministratorController();
+
+        });
+
+    </script>
+</body>
+
+</html>

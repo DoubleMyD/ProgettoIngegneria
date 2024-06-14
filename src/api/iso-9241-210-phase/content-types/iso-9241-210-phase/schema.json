@@ -4,14 +4,15 @@
   "info": {
     "singularName": "iso-9241-210-phase",
     "pluralName": "iso-9241-210-phases",
-    "displayName": "ISO 9241-210 Phase"
+    "displayName": "ISO 9241-210 Phase",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "numero": {
+    "identificatore": {
       "type": "decimal"
     },
     "nome": {
@@ -22,6 +23,11 @@
       "relation": "manyToMany",
       "target": "api::pattern.pattern",
       "inversedBy": "iso_9241_210_phases"
+    },
+    "privacy_by_design_principles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::privacy-by-design-principle.privacy-by-design-principle"
     }
   }
 }

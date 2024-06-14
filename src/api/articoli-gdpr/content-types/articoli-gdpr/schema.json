@@ -4,14 +4,15 @@
   "info": {
     "singularName": "articoli-gdpr",
     "pluralName": "articoli-gdprs",
-    "displayName": "Articoli GDPR"
+    "displayName": "Articoli GDPR",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "numero": {
+    "identificatore": {
       "type": "integer"
     },
     "nome": {

@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "collocazione": {
+    "nome": {
       "type": "string"
     },
     "patterns": {

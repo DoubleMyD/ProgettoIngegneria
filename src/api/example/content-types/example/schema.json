@@ -4,7 +4,8 @@
   "info": {
     "singularName": "example",
     "pluralName": "examples",
-    "displayName": "Example"
+    "displayName": "Example",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -13,11 +14,6 @@
   "attributes": {
     "testo": {
       "type": "text"
-    },
-    "pattern": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::pattern.pattern"
     }
   }
 }

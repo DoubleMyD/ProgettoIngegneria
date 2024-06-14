@@ -21,7 +21,7 @@
             margin-top: 20px;
         }
         #pattern-info {
-            border: 1px solid #ddd;
+            border: 1px solid #5a0f0f;
             padding: 10px;
             margin-top: 20px;
             display: none;
@@ -30,30 +30,27 @@
 </head>
 <body>
     <h1>Welcome to Our Service</h1>
-    <div id="content">
-        <label for="pattern-select">Choose a pattern:</label>
-        <select id="pattern-select">
-            <option value="">Select a pattern</option>
-        </select>
-        <div id="pattern-info">
-            <h2 id="pattern-name"></h2>
-            <p id="pattern-description"></p>
-            <p id="pattern-context"></p>
-            <p id="pattern-mvc"></p>
-            <p id="pattern-strategies"></p>
-            <p id="pattern-principles"></p>
-            <p id="pattern-owasp-categories"></p>
-            <p id="pattern-cwe-categories"></p>
-            <p id="pattern-gdpr-articles"></p>
-            <p id="pattern-iso-phases"></p>
-        </div>
+    <div id="login-content">
+        <a href="/login-page">
+            <img src="path-to-your-image.jpg" alt="login of the image">     
+        </a>
+    </div>
+    <div id="login-content">
+        <a href="/administrator">
+            <img src="path-to-your-image.jpg" alt="Administrator of the image">     
+        </a>
     </div>
     
+    <svg height="100" width="100">
+        <circle id="myCircle" cx="50" cy="50" r="40" stroke="black" stroke-width="3" />
+    </svg>
+   
+    </div>
     <script type="module">
-        import PatternController from './back-end/controllers/PatternController.js';
+        import LoggedUserController from '././front-end/controllers/LoggedUserController.js';
        
         document.addEventListener('DOMContentLoaded', () => {
-          new PatternController();
+            new LoggedUserController();
         });
 
     </script>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        #content {
+            width: 80%;
+            margin-top: 20px;
+        }
+        #pattern-info {
+            border: 1px solid #5a0f0f;
+            padding: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to Our Service</h1>
+    <div id="login-content">
+        <a href="/login-page">
+            <img src="path-to-your-image.jpg" alt="Description of the image">     
+        </a>
+    </div>
+    <div id="pattern-content">
+        <label for="pattern-select">Choose a pattern:</label>
+        <select id="pattern-select">
+            <option value="">Select a pattern</option>
+        </select>
+        <label for="filter-pattern">Select a filter : </label>
+        <select id="filter-pattern">
+            <option value="">Select a filter</option>
+        </select>
+        <div id="pattern-info">
+           
+        </div>
+    </div>
+    <div id="strategy-content">
+        <label for="strategy-select">Choose a strategy:</label>
+        <select id="strategy-select">
+            <option value="">Select a strategy</option>
+        </select>
+        <div id="strategy-info">
+
+        </div>
+    </div>
+    <div id="article-content">
+        <label for="article-select">Choose an article:</label>
+        <select id="article-select">
+            <option value="">Select a article</option>
+        </select>
+        <div id="article-info">
+
+        </div>
+    </div>
+    <div id="owasp-content">
+        <label for="owasp-select">Choose an OWASP Category:</label>
+        <select id="owasp-select">
+            <option value="">Select a OWASP Category</option>
+        </select>
+        <div id="owasp-info">
+
+        </div>
+    </div>
+    <div id="iso-content">
+        <label for="iso-select">Choose an ISO Phase:</label>
+        <select id="iso-select">
+            <option value="">Select an ISO Phase</option>
+        </select>
+        <div id="iso-info">
+
+        </div>
+    </div>
+    <script type="module">
+        import LandingPageController from '././front-end/controllers/LandingPageController.js';
+       
+        document.addEventListener('DOMContentLoaded', () => {
+            new LandingPageController();
+        });
+
+    </script>
+</body>
+</html>

@@ -742,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -771,6 +770,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    notification: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -794,12 +794,13 @@ export interface ApiArticoliGdprArticoliGdpr extends Schema.CollectionType {
     singularName: 'articoli-gdpr';
     pluralName: 'articoli-gdprs';
     displayName: 'Articoli GDPR';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    numero: Attribute.Integer;
+    identificatore: Attribute.Integer;
     nome: Attribute.String;
     patterns: Attribute.Relation<
       'api::articoli-gdpr.articoli-gdpr',
@@ -830,13 +831,14 @@ export interface ApiCweTop25WeaknessCweTop25Weakness
     singularName: 'cwe-top-25-weakness';
     pluralName: 'cwe-top-25-weaknesses';
     displayName: 'CWE Top 25 Weakness';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     identificatore: Attribute.String;
-    weakness: Attribute.Text;
+    nome: Attribute.Text;
     patterns: Attribute.Relation<
       'api::cwe-top-25-weakness.cwe-top-25-weakness',
       'manyToMany',
@@ -866,17 +868,13 @@ export interface ApiExampleExample extends Schema.CollectionType {
     singularName: 'example';
     pluralName: 'examples';
     displayName: 'Example';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     testo: Attribute.Text;
-    pattern: Attribute.Relation<
-      'api::example.example',
-      'oneToOne',
-      'api::pattern.pattern'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -894,6 +892,51 @@ export interface ApiExampleExample extends Schema.CollectionType {
   };
 }
 
+export interface ApiFeedbackFeedback extends Schema.CollectionType {
+  collectionName: 'feedbacks';
+  info: {
+    singularName: 'feedback';
+    pluralName: 'feedbacks';
+    displayName: 'feedback';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    users_permissions_user: Attribute.Relation<
+      'api::feedback.feedback',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    commento: Attribute.Text;
+    collection: Attribute.Enumeration<
+      [
+        'Pattern',
+        'Strategia',
+        'Articoli GDPR',
+        'OWASP Top 10 Category',
+        'ISO 9241-210 Phase'
+      ]
+    >;
+    nameOfObject: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::feedback.feedback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::feedback.feedback',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiIso9241210PhaseIso9241210Phase
   extends Schema.CollectionType {
   collectionName: 'iso_9241_210_phases';
@@ -901,17 +944,23 @@ export interface ApiIso9241210PhaseIso9241210Phase
     singularName: 'iso-9241-210-phase';
     pluralName: 'iso-9241-210-phases';
     displayName: 'ISO 9241-210 Phase';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    numero: Attribute.Decimal;
+    identificatore: Attribute.Decimal;
     nome: Attribute.String;
     patterns: Attribute.Relation<
       'api::iso-9241-210-phase.iso-9241-210-phase',
       'manyToMany',
       'api::pattern.pattern'
+    >;
+    privacy_by_design_principles: Attribute.Relation<
+      'api::iso-9241-210-phase.iso-9241-210-phase',
+      'oneToMany',
+      'api::privacy-by-design-principle.privacy-by-design-principle'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -943,7 +992,7 @@ export interface ApiMvcMvc extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    collocazione: Attribute.String;
+    nome: Attribute.String;
     patterns: Attribute.Relation<
       'api::mvc.mvc',
       'manyToMany',
@@ -1005,10 +1054,10 @@ export interface ApiPatternPattern extends Schema.CollectionType {
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
-    Nome: Attribute.String;
+    nome: Attribute.String;
     descrizione: Attribute.Text;
     contesto: Attribute.Text;
     mvcs: Attribute.Relation<
@@ -1046,9 +1095,14 @@ export interface ApiPatternPattern extends Schema.CollectionType {
       'manyToMany',
       'api::iso-9241-210-phase.iso-9241-210-phase'
     >;
+    examples: Attribute.Relation<
+      'api::pattern.pattern',
+      'oneToMany',
+      'api::example.example'
+    >;
+    searchCounter: Attribute.Integer & Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::pattern.pattern',
       'oneToOne',
@@ -1118,6 +1172,16 @@ export interface ApiStrategiaStrategia extends Schema.CollectionType {
       'manyToMany',
       'api::pattern.pattern'
     >;
+    privacy_by_design_principles: Attribute.Relation<
+      'api::strategia.strategia',
+      'oneToMany',
+      'api::privacy-by-design-principle.privacy-by-design-principle'
+    >;
+    articoli_gdprs: Attribute.Relation<
+      'api::strategia.strategia',
+      'oneToMany',
+      'api::articoli-gdpr.articoli-gdpr'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1157,6 +1221,7 @@ declare module '@strapi/types' {
       'api::articoli-gdpr.articoli-gdpr': ApiArticoliGdprArticoliGdpr;
       'api::cwe-top-25-weakness.cwe-top-25-weakness': ApiCweTop25WeaknessCweTop25Weakness;
       'api::example.example': ApiExampleExample;
+      'api::feedback.feedback': ApiFeedbackFeedback;
       'api::iso-9241-210-phase.iso-9241-210-phase': ApiIso9241210PhaseIso9241210Phase;
       'api::mvc.mvc': ApiMvcMvc;
       'api::owasp-top-10-category.owasp-top-10-category': ApiOwaspTop10CategoryOwaspTop10Category;

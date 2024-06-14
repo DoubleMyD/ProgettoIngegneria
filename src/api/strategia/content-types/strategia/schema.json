@@ -20,6 +20,16 @@
       "relation": "manyToMany",
       "target": "api::pattern.pattern",
       "inversedBy": "strategias"
+    },
+    "privacy_by_design_principles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::privacy-by-design-principle.privacy-by-design-principle"
+    },
+    "articoli_gdprs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::articoli-gdpr.articoli-gdpr"
     }
   }
 }

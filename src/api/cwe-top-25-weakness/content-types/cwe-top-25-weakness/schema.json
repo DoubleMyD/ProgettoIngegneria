@@ -4,7 +4,8 @@
   "info": {
     "singularName": "cwe-top-25-weakness",
     "pluralName": "cwe-top-25-weaknesses",
-    "displayName": "CWE Top 25 Weakness"
+    "displayName": "CWE Top 25 Weakness",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,7 +15,7 @@
     "identificatore": {
       "type": "string"
     },
-    "weakness": {
+    "nome": {
       "type": "text"
     },
     "patterns": {

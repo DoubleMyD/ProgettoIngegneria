@@ -8,11 +8,11 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "Nome": {
+    "nome": {
       "type": "string"
     },
     "descrizione": {
@@ -62,6 +62,15 @@
       "relation": "manyToMany",
       "target": "api::iso-9241-210-phase.iso-9241-210-phase",
       "mappedBy": "patterns"
+    },
+    "examples": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::example.example"
+    },
+    "searchCounter": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
