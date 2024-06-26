@@ -5,6 +5,7 @@ import PatternView from '../views/PatternPage/PatternView.js';
 export default class PatternController {
     patternId;
     patternFilter = "AllData";
+     
     shownPatternName;
 
     constructor() {

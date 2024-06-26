@@ -5,6 +5,7 @@ export default class SearchModel{
     static owaspCategoriesApiUrl = 'http://localhost:1337/api/owasp-top-10-categories';
     static isoPhasesApiUrl = 'http://localhost:1337/api/iso-9241-210-phases';
     static strapiUrl = 'http://localhost:1337';
+    //static contextApiUrl = ""; //cosa metto come link? 
 
     static async fetchPatterns() {
         const response = await fetch(SearchModel.patternsApiUrl + '?populate=*&pagination[page]=1&pagination[pageSize]=50');
@@ -24,6 +25,7 @@ export default class SearchModel{
         const response = await fetch(`${SearchModel.patternsApiUrl}/increment-search/${patternId}`);
         //const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`);
         const pattern = await response.json();
+        //console.log(pattern);
         return pattern;
     }
     
@@ -98,6 +100,29 @@ export default class SearchModel{
         const data = await response.json();
         return data.data;
     }
+
+    /*static async fetchContexts(){
+        const response = await fetch(SearchModel.patternsApiUrl + '?populate=*');
+        const patterns = await response.json();
+        console.log(patterns); // Log per vedere la struttura dei dati
+       
+        /*const contexts = patterns.data.map(pattern => pattern.data.contesto); 
+        return contexts;
+        //const contexts = patterns.data.map(pattern => pattern.attributes.contesto); // Assumendo che 'contesto' sia dentro 'attributes'
+        //console.log(contexts);
+        //return contexts;
+        return patterns.data;
+    }
+    
+
+    /*static async fetchContextDetails(patternId){
+        const response = await fetch(SearchModel.patternsApiUrl+ '?filters[contesto][$eq]=' + patternId);
+        //const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`);
+        const pattern = await response.json();
+        //console.log(pattern);
+        return pattern.data.attributes.contesto;
+        
+    }*/
 
 /*    static async fetchStrategias(){
         const response = await fetch(`${this.strapiUrl}/api/strategias?populate=*`);

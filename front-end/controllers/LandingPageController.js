@@ -19,7 +19,8 @@ export default class LandingPageController {
         const articles = await this.SearchModel.fetchArticles();
         const owaspCategories = await this.SearchModel.fetchOwaspCategories();
         const isoPhases = await this.SearchModel.fetchIsoPhases();
-        this.view.initialize(patterns, strategies, articles, owaspCategories, isoPhases);
+        const contexts = await this.SearchModel.fetchPatterns();
+        this.view.initialize(patterns, strategies, articles, owaspCategories, isoPhases, contexts);
         
         this.view.patternSelect.addEventListener('change', async (event) => {
             const target = event.target;
@@ -78,6 +79,26 @@ export default class LandingPageController {
                 } 
             }
         });
+
+
+        /*this.view.contextSelect.addEventListener('change', async (event) => {
+            const target = event.target;
+            if(target instanceof HTMLSelectElement){
+                this.contextPattern = target.value;
+                this.updatePatternDetails(this.patternId);
+            }
+        });*/
+
+        this.view.contextSelect.addEventListener('change', async (event) => {
+            const target = event.target;
+            if(target instanceof HTMLSelectElement){
+                this.patternId = target.value;
+                if (this.patternId) {
+                  this.updateContextDetails(this.patternId);
+                } 
+            }
+        });
+        
     }
 
     async updatePatternDetails(patternId){
@@ -132,4 +153,17 @@ export default class LandingPageController {
             console.error('Error fetching pattern details:', error);
         }
     }
+
+    async updateContextDetails(patternId){
+        try{
+            const pattern = await this.SearchModel.fetchPatternDetails(patternId);
+            this.view.updateContextSection(pattern.data.contesto);
+
+
+        }catch(error){
+            console.error('Error fetching context details:', error);
+        }
+    }
+
+    //update 
 }

@@ -8,24 +8,27 @@ export default class LandingPageView{
         this.articleSelect = document.getElementById('article-select');
         this.owaspSelect = document.getElementById('owasp-select');
         this.isoSelect = document.getElementById('iso-select');
+        this.contextSelect = document.getElementById('context-select');
 
         this.patternInfo = document.getElementById('pattern-info');
         this.strategyInfo = document.getElementById('strategy-info');
         this.articleInfo = document.getElementById('article-info');
         this.owaspInfo = document.getElementById('owasp-info');
         this.isoInfo = document.getElementById('iso-info');
-    
+        this.contextInfo = document.getElementById('context-info');
+
         if(localStorage.getItem('jwtToken')){
             this.createElement('div', document.getElementById('login-content'), 'autorizzato');
         }
     }
 
-    initialize(patterns, strategies, articles, owasp, iso){
+    initialize(patterns, strategies, articles, owasp, iso, contexts){
         this.populateDropdown(patterns, this.patternSelect);
         this.populateDropdown(strategies, this.strategySelect);
         this.populateDropdown(articles, this.articleSelect);
         this.populateDropdown(owasp, this.owaspSelect);
         this.populateDropdown(iso, this.isoSelect);
+        this.populateContextDropdown(contexts, this.contextSelect);
         this.filters.forEach(filter => { this.createElement('option', this.filterPattern, filter)});
     }
 
@@ -34,6 +37,16 @@ export default class LandingPageView{
             const option = document.createElement('option');
             option.value = singleData.id;
             option.textContent = singleData.attributes.nome;
+            container.appendChild(option);
+        });
+    }
+
+    populateContextDropdown(data, container) {
+        data.forEach(singleData => {
+            const option = document.createElement('option');
+            option.value = singleData.id;
+           
+            option.textContent = singleData.attributes.contesto;
             container.appendChild(option);
         });
     }
@@ -111,6 +124,14 @@ export default class LandingPageView{
 
         this.createElement('h2', this.isoInfo, this.getName(isoPhase));  
         this.createElement('p', this.isoInfo, this.getRelatedPatterns(isoPhase));  
+    }
+
+    updateContextSection(context){
+        this.contextInfo.innerHTML = '';
+        this.contextInfo.style.display = 'block';
+
+        this.createElement('h2', this.contextInfo, this.getName(context));  
+        this.createElement('p', this.contextInfo, this.getRelatedPatterns(context));  
     }
 
     showPatternData(pattern){
