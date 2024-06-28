@@ -104,6 +104,8 @@ export default class LandingPageController {
     async updatePatternDetails(patternId){
         try{
             const pattern = await this.SearchModel.fetchPatternDetails(patternId);
+            this.SearchModel.incrementSearchCounter(patternId, pattern.attributes.searchCounter);
+
             if(this.patternFilter === 'Examples'){
                 if(pattern.attributes.examples.data[0] === undefined || pattern.attributes.examples.data[0] === ''){
                     this.view.showInformationNotfound();
@@ -117,7 +119,6 @@ export default class LandingPageController {
             console.error('Error fetching pattern details:', error);
         }
     }
-
     async updateStrategyDetails(strategyId){
         try{
             const strategy = await this.SearchModel.fetchStrategyDetails(strategyId);
@@ -157,7 +158,7 @@ export default class LandingPageController {
     async updateContextDetails(patternId){
         try{
             const pattern = await this.SearchModel.fetchPatternDetails(patternId);
-            this.view.updateContextSection(pattern.data.contesto);
+            this.view.updateContextSection(pattern);
 
 
         }catch(error){

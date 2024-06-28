@@ -29,56 +29,56 @@ export default class LoggedUserModel{
     }
 
     static async modifyNotificationAttribute(jwt, userId, boolean){
-    try{
-        const response = await fetch(this.strapiUserUrl + '/' + userId, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                    notification: boolean
-            }),
-        });
-
-        if (!response.ok) {
-            // If the response is not OK, handle the error
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Not allowed, failed');
-        }
-        return true;
-
-    } catch (error) {
-        console.error('Error during posting comment:', error);
-        return 'Error, make sure you are logged in to add comments';
-    }
-    }
-
-    static async notify(jwt, userId){
-        try{
-            const response = await fetch(this.strapiUserUrl + '/' + userId, {
-                method: 'GET',
+        try {
+            const response = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                method: 'PUT',
                 headers: {
                     'Authorization': `Bearer ${jwt}`,
                     'Content-Type': 'application/json'
                 },
+                body: JSON.stringify({
+                    notification: boolean
+                }),
             });
     
             if (!response.ok) {
-                // If the response is not OK, handle the error
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Not allowed, failed');
+                throw new Error('Modifica delle notifiche non riuscita');
             }
-            const user = await response.json();
-            console.log(user.notification);
-            return user.notification;
-    
+            return true;
         } catch (error) {
-            console.error('Error during posting comment:', error);
-            return 'Error, make sure you are logged in to add comments';
+            console.error('Errore durante la modifica delle notifiche:', error);
+            return false;
+        }
+    }
+
+    static async notify(jwt, userId){
+    try {
+        const response = await fetch(`${this.strapiUserUrl}/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${jwt}`,
+                'Content-Type': 'application/json'
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error('Recupero delle notifiche non riuscito');
         }
 
+        const user = await response.json();
+        console.log('Dati ricevuti dal server:', user);
+        return {
+            hasNotification: user.notification,
+            details: user.notificationDetails // Assicurati che il campo sia corretto nel tuo caso
+        };
+    } catch (error) {
+        console.error('Errore durante il recupero delle notifiche:', error);
+        return {
+            hasNotification: false,
+            details: ""
+        };
     }
+}
 }
 
 

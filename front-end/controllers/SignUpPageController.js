@@ -33,7 +33,7 @@ export default class LoginPageController{
             this.view.showSyntaxError('username syntax is not correct');
             return;
         }
-        
+
         if(await this.authenticationModel.registerUser(username, email, password)){
             alert('Registretion completed');
             window.location.href = "/login-page";

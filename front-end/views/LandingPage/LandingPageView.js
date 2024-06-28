@@ -54,6 +54,7 @@ export default class LandingPageView{
     updatePatternSection(filter, pattern){
         this.patternInfo.innerHTML = '';
         this.patternInfo.style.display = 'block';
+ 
 
         this.createElement('h2', this.patternInfo, this.getName(pattern));  
         switch(filter){
@@ -96,10 +97,12 @@ export default class LandingPageView{
         this.strategyInfo.innerHTML = '';
         this.strategyInfo.style.display = 'block';
 
+        console.log(strategy);
         this.createElement('h2', this.strategyInfo, this.getName(strategy));  
         this.createElement('p', this.strategyInfo, this.getRelatedPatterns(strategy));  
         this.createElement('p', this.strategyInfo, this.getRelatedGDPRArticles(strategy));  
         this.createElement('p', this.strategyInfo, this.getRelatedPrinciples(strategy));  
+        
     }
 
     updateArticleSection(article){
@@ -126,12 +129,12 @@ export default class LandingPageView{
         this.createElement('p', this.isoInfo, this.getRelatedPatterns(isoPhase));  
     }
 
-    updateContextSection(context){
+    updateContextSection(contesto){
         this.contextInfo.innerHTML = '';
         this.contextInfo.style.display = 'block';
 
-        this.createElement('h2', this.contextInfo, this.getName(context));  
-        this.createElement('p', this.contextInfo, this.getRelatedPatterns(context));  
+        //this.createElement('h2', this.contextInfo, this.getNameContext(contesto));  
+        this.createElement('p', this.contextInfo, this.getName(contesto));  
     }
 
     showPatternData(pattern){
@@ -154,13 +157,13 @@ export default class LandingPageView{
     getDescription(data){
         let string = "Descrizione : ";
         string += data.attributes.descrizione;
-        return string
+        return string;
     }
 
     getContext(data){
         let string = "Contesto : ";
         string += data.attributes.contesto;
-        return string
+        return string;
     }
 
     getRelatedMvc(data) {
@@ -194,14 +197,14 @@ export default class LandingPageView{
     }
 
     getRelatedGDPRArticles(data){
-        let string = "GDPR Arctiles : ";
+        let string = "GDPR Articles : ";
         data.attributes.articoli_gdprs.data.forEach(element => {string += element.attributes.numero + " : " + element.attributes.nome + '    '});
         return string;
     }
 
     getRelatedISOPhase(data){
         let string = "ISO 9241 210 Phases : ";
-        data.attributes.iso_9241_210_phases.data.forEach(element => {string += element.attributes.numero + " : " + element.attributes.nome + '    '});
+        data.attributes.iso_9241_210_phases.data.forEach(element => {string += element.attributes.numero + " : " + element.nome + '    '});
         return string;
     }
 
@@ -216,7 +219,7 @@ export default class LandingPageView{
         data.attributes.patterns.data.forEach(pattern => string += pattern.attributes.nome + "  ,  ");
         return string;
     }
-
+    
     showInformationNotfound(){
         alert("INFORMATION NOT FOUND");
     }

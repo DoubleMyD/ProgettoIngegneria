@@ -133,7 +133,7 @@ export default class LandingPageView{
     getContext(data){
         let string = "Contesto : ";
         string += data.contesto;
-        return string
+        return string;
     }
 
     getRelatedMvc(data) {

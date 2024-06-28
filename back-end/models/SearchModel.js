@@ -20,14 +20,45 @@ export default class SearchModel{
         return fivePatterns;
     }
 
-    //restituisce il pattern ricercato e incrementa il counter del numero di ricerche effettuate su quel pattern
+    //restituisce il pattern ricercato e incrementa il counter del numero di ricerche effettuate su quel pattern // /increment-search/
     static async fetchPatternDetails(patternId) {
-        const response = await fetch(`${SearchModel.patternsApiUrl}/increment-search/${patternId}`);
+        const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}?populate=*`);
         //const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`);
         const pattern = await response.json();
-        //console.log(pattern);
-        return pattern;
+        return pattern.data;
     }
+
+    static async incrementSearchCounter(patternId, actualCounter){
+        console.log(actualCounter)
+          try {
+            const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`, {
+                method: 'PUT',
+                headers: {
+                    //'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    data: {
+                        searchCounter:  (actualCounter + 1),
+                    }
+                }),
+            });
+
+            if (!response.ok) {
+                // If the response is not OK, handle the error
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Not allowed, failed');
+            }
+
+            const data = await response.json();
+            return data.data;
+
+        } catch (error) {
+            console.error('Error during authentication:', error);
+            return null;  // Return null if authentication fails
+        }
+    }
+    
     
     static async fetchStrategies() {
         const response = await fetch(SearchModel.strategiesApiUrl + '?populate=*');

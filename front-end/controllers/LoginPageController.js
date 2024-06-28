@@ -33,18 +33,19 @@ export default class LoginPageController{
             return;
         }
         this.view.showSyntaxError(password);
-        
+
         const data = await this.authenticationModel.authenticateUser(email, password);
         if(data != null){
             localStorage.setItem('jwtToken', data.jwt);
             localStorage.setItem('userId', data.userId);
             alert(data.userId);
-            window.location.href = "/pattern";
+            window.location.href = "/logged-user";
         }
     }
 
     logout(){
         localStorage.removeItem('jwtToken');
+        alert('logout successful');
+        window.location.href = "/landing-page";
     }
 }
-
