@@ -69,4 +69,9 @@ export default class LoggedUserController{
         }
     }
 
+    logout(){
+        localStorage.removeItem('jwtToken');
+        alert('logout successful');
+        window.location.href = "/landing-page";
+    }
 }
