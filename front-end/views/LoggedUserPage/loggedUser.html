@@ -9,12 +9,15 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #f0f2f5;
             display: flex;
             flex-direction: column;
             align-items: center;
+            color: #333;
         }
         h1 {
             margin-top: 20px;
+            color: #333;
         }
         #content {
             width: 80%;
@@ -36,45 +39,122 @@
         #favorite-patterns {
             margin-top: 20px;
             width: 80%;
-            border: 1px solid #ccc;
-            padding: 10px;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
         .pattern {
-            border: 1px solid #ccc;
+            border: 1px solid #e0e0e0;
             padding: 10px;
             margin-bottom: 10px;
+            background-color: #ffffff;
+            border-radius: 8px;
         }
-
+        a {
+            text-decoration: none;
+            color: #0062ff;
+        }
+        a img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+        a img:hover {
+            transform: scale(1.05);
+        }
+        svg {
+            margin-top: 20px;
+        }
+        #login-content {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+            width: 80%;
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .navbar {
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar a {
+            margin: 0 15px;
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .navbar a:hover {
+            color: #0062ff;
+        }
+        .content-wrapper {
+            margin-top: 80px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logout-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #0062ff;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .logout-button:hover {
+            background-color: #004db3;
+        }
+        #notification-text {
+            text-align: center;
+            font-weight: bold;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to Our Service</h1>
-    <div id="login-content">
-        <a href="/login-page">
-            <img src="path-to-your-image.jpg" alt="login of the image">     
-        </a>
+    <div class="navbar">
+        <a href="/landing-page">Landing Page</a>
+        <a href="/pattern">Pattern Page</a>
     </div>
-    <div id="login-content">
-        <a href="/administrator">
-            <img src="path-to-your-image.jpg" alt="Administrator of the image">     
-        </a>
-    </div>
-    
-    <svg height="100" width="100">
-        <circle id="myCircle" cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="grey" />
-    </svg>
-   
-    <div id="notificationDetails"></div>
+    <div class="content-wrapper">
+        <h1>Welcome to Our Service</h1>
+        
+        <div id="notification-text">Notification System</div>
+        
+        <svg height="100" width="100">
+            <circle id="myCircle" cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="grey" />
+        </svg>
+       
+        <div id="notificationDetails"></div>
 
-    <!-- Aggiunta sezione per i pattern preferiti -->
-    <div id="favorite-patterns">
-        <!-- Qui verranno inseriti i pattern preferiti -->
-        <h2>Your Favorite Patterns</h2>
-        <ul id="favorite-patterns-list"></ul>
+        <div id="favorite-patterns">
+            <h2>Your Favorite Patterns</h2>
+            <ul id="favorite-patterns-list"></ul>
+        </div>
+
+        <button id="logout-button" class="logout-button">Logout</button>
     </div>
     
     <script type="module">
-        import LoggedUserController from '././front-end/controllers/LoggedUserController.js';
+        import LoggedUserController from './front-end/controllers/LoggedUserController.js';
        
         document.addEventListener('DOMContentLoaded', () => {
             new LoggedUserController();
