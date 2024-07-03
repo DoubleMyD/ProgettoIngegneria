@@ -5,6 +5,7 @@ export default class SearchModel{
     static owaspCategoriesApiUrl = 'http://localhost:1337/api/owasp-top-10-categories';
     static isoPhasesApiUrl = 'http://localhost:1337/api/iso-9241-210-phases';
     static strapiUrl = 'http://localhost:1337';
+    static strapiUserUrl = 'http://localhost:1337/api/users'
     //static contextApiUrl = ""; //cosa metto come link? 
 
     static async fetchPatterns() {
@@ -132,28 +133,58 @@ export default class SearchModel{
         return data.data;
     }
 
-    /*static async fetchContexts(){
-        const response = await fetch(SearchModel.patternsApiUrl + '?populate=*');
-        const patterns = await response.json();
-        console.log(patterns); // Log per vedere la struttura dei dati
-       
-        /*const contexts = patterns.data.map(pattern => pattern.data.contesto); 
-        return contexts;
-        //const contexts = patterns.data.map(pattern => pattern.attributes.contesto); // Assumendo che 'contesto' sia dentro 'attributes'
-        //console.log(contexts);
-        //return contexts;
-        return patterns.data;
-    }
-    
+    static async addToFavorites(jwt, userId, patternId) {
+        try {
+            // Fetch user information to get current favoritePatterns string
+            const userResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
 
-    /*static async fetchContextDetails(patternId){
-        const response = await fetch(SearchModel.patternsApiUrl+ '?filters[contesto][$eq]=' + patternId);
-        //const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`);
-        const pattern = await response.json();
-        //console.log(pattern);
-        return pattern.data.attributes.contesto;
-        
-    }*/
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user information');
+            }
+
+            const userData = await userResponse.json();
+            let favoritePatternsString = userData.favoritePatterns || '';
+
+            // Check if patternId already exists in favoritePatternsString
+            const patternIdString = patternId.toString();
+            const patternSeparator = '#';
+
+            if (favoritePatternsString.includes(patternIdString)) {
+                throw new Error('Pattern is already in favorites');
+            }
+
+            // Add patternId to favoritePatternsString
+            if (favoritePatternsString) {
+                favoritePatternsString += `${patternSeparator}${patternIdString}`;
+            } else {
+                favoritePatternsString = patternIdString;
+            }
+
+            // Update user with new favoritePatternsString
+            const updateResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ favoritePatterns: favoritePatternsString })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error('Failed to update favorite patterns');
+            }
+
+            return true; // Success
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+            return error.message;
+        }
+    
+    }
 
 /*    static async fetchStrategias(){
         const response = await fetch(`${this.strapiUrl}/api/strategias?populate=*`);

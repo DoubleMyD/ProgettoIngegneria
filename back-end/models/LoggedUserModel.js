@@ -1,5 +1,6 @@
 export default class LoggedUserModel{
     static strapiUserUrl = 'http://localhost:1337/api/users'
+    static patternsApiUrl = 'http://localhost:1337/api/patterns';
 
     static async newNotification(jwt) {
         try {
@@ -52,33 +53,62 @@ export default class LoggedUserModel{
     }
 
     static async notify(jwt, userId){
-    try {
-        const response = await fetch(`${this.strapiUserUrl}/${userId}`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${jwt}`,
-                'Content-Type': 'application/json'
-            },
-        });
+        try {
+            const response = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+            });
 
-        if (!response.ok) {
-            throw new Error('Recupero delle notifiche non riuscito');
+            if (!response.ok) {
+                throw new Error('Recupero delle notifiche non riuscito');
+            }
+
+            const user = await response.json();
+            console.log('Dati ricevuti dal server:', user);
+            return {
+                hasNotification: user.notification,
+                details: user.notificationDetails // Assicurati che il campo sia corretto nel tuo caso
+            };
+        } catch (error) 
+        {
+            console.error('Errore durante il recupero delle notifiche:', error);
+            return {
+                hasNotification: false,
+                details: ""
+            };
         }
-
-        const user = await response.json();
-        console.log('Dati ricevuti dal server:', user);
-        return {
-            hasNotification: user.notification,
-            details: user.notificationDetails // Assicurati che il campo sia corretto nel tuo caso
-        };
-    } catch (error) {
-        console.error('Errore durante il recupero delle notifiche:', error);
-        return {
-            hasNotification: false,
-            details: ""
-        };
     }
-}
+
+    // Recupera i pattern preferiti di un utente
+    static async getFavoritePatterns(jwt, userId) {
+        try {
+            // Recupera le informazioni dell'utente
+            const userResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user information');
+            }
+
+            const userData = await userResponse.json();
+            const favoritePatternsString = userData.favoritePatterns || '';
+
+            // Converti la stringa di pattern separati da # in un array
+            const favoritePatternsArray = favoritePatternsString.split('#').filter(patternId => patternId);
+
+            return favoritePatternsArray;
+        } catch (error) {
+            console.error('Error fetching favorite patterns:', error);
+            return null;
+        }
+    }
+
 }
 
 

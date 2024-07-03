@@ -26,38 +26,75 @@
             margin-top: 20px;
             display: none;
         }
+        .favorite-section {
+            margin-top: 10px;
+        }
+        .button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+        #controls label, #controls select {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>PATTERNS !!!!!!</h1>
     <div id="pattern-content">
         <a href="/login-page">
-            <img src="path-to-your-image.jpg" alt="Description of the image">     
+            <button id="login-button" class="button">login page</button>
         </a>
         <div id="five-patterns-section">
-            <button id="most-researched-button">Most Researched Patterns</button>
+            <button id="most-researched-button" class="button">Most Researched Patterns</button>
         </div>
-        <label for="pattern-select">Choose a pattern:</label>
-        <select id="pattern-select">
-            <option value="Select a pattern">Select a pattern</option>
-        </select>
-        <label for="filter-pattern">Select a filter : </label>
-        <select id="filter-pattern">
-            <option value="">Select a filter</option>
-        </select>
+        <div id="controls">
+            <label for="pattern-select">Choose a pattern:</label>
+        <div class="favorite-section">
+            <select id="pattern-select">
+                <option value="Select a pattern">Select a pattern</option>
+            </select>
+            <button id="add-to-favorites-button">Add to favorites</button>
+        
+            </select>
+            <label for="filter-pattern">Select a filter : </label>
+            <select id="filter-pattern">
+                <option value="">Select a filter</option>
+            </select>
+        </div>
+        <div id="pattern-buttons">
+            <a href="/landing-page">
+                <button id="landing-page-button" class="button">landing page</button>
+            </a>
+        </div>
         <div id="pattern-info">
            
         </div>
     </div>
     <div id="feedback-section">
-        <button id="addComment-button">Add comment</button>
+        <button id="addComment-button" class="button">Add comment</button>
 
         <div id="addComment-section" class="modal">
             <div class="modal-content">
-                <button id="close-button">Close</button>
+                <button id="close-button" class="button">Close</button>
                 <h2>Add your comment</h2>
                 <textarea id="commentInput" placeholder="Write your comment here..."></textarea>
-                <button id="saveComment-button">Submit</button>
+                <button id="saveComment-button" class="button">Submit</button>
             </div>
         </div>
 
@@ -66,12 +103,13 @@
         </div>
     </div>
     
+    
     <script type="module">
         import PatternController from '././front-end/controllers/PatternController.js';
        
         document.addEventListener('DOMContentLoaded', () => {
-            new PatternController();
-
+            const patternController = new PatternController();
+            document.getElementById('add-to-favorites-button').addEventListener('click', () => patternController.addToFavorites());
         });
 
     </script>

@@ -64,6 +64,19 @@
         #login-button:hover {
             background-color: #0056b3;
         }
+        #landing-page-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        #landing-page-button:hover {
+            background-color: #0056b3;
+        }
         .login-footer {
             text-align: center;
             margin-top: 20px;
@@ -86,7 +99,9 @@
         <button id="login-button">Login</button>
         <div class="login-footer">
             <p>You are not registered yet? <a href="/signup-page">Sign up</a></p>
-            <button onclick="window.location.href = '/landing-page';">LANDING PAGE</button>
+            <a href="/landing-page">
+                <button id="landing-page-button">Landing page</button>
+            </a>
         </div>
     </div>
 

@@ -12,40 +12,120 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            background: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         h1 {
+            font-size: 2.5em;
+            color: #5a0f0f;
+        }
+        .nav-bar {
+            width: 100%;
+            background-color: #b3dcff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .nav-bar a {
+            color: #5a0f0f;
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #96ceff;
+            border-radius: 5px;
+            font-size: 1em;
+            text-align: center;
+        }
+        .nav-bar a:hover {
+            background-color: #96ceff;
+        }
+        #login-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #5a0f0f;
+            background-color: #96ceff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        #login-button:hover {
+            background-color: #b3dcff;
+        }
+        #dropdown-container {
+            width: 100%;
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #5a0f0f;
+            border-radius: 10px;
+        }
+        select {
+            width: 200px;
+            padding: 5px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        option {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        label {
+            font-weight: bold;
             margin-top: 20px;
         }
-        #content {
-            width: 80%;
-            margin-top: 20px;
-        }
-        #pattern-info {
+        #pattern-info, #strategy-info, #article-info, #owasp-info, #iso-info, #context-info {
             border: 1px solid #5a0f0f;
             padding: 10px;
-            margin-top: 20px;
+            margin-top: 10px;
+            border-radius: 5px;
             display: none;
         }
-
-        #context-select {
-            width: 200px; /* Imposta una larghezza fissa */
+        @media (max-width: 600px) {
+            select {
+                width: 100%;
+            }
         }
-        
-        #context-select option {
-            width: 100%;
-            white-space: nowrap; /* Impedisce la rottura della riga */
-            overflow: hidden; /* Nasconde il testo che eccede la larghezza */
-            text-overflow: ellipsis; /* Aggiunge i puntini di sospensione */
+        .checkmark-container {
+            display: flex;
+            align-items: center;
         }
-
+        .checkmark-container span {
+            font-weight: bold; /* Testo in grassetto */
+            font-size: 1.2em; /* Dimensione del testo aumentata */
+            text-decoration: none; /* Rimuove la sottolineatura */
+        }
+        label[for="pattern-select"] {
+            font-size: 1em; /* Dimensione del testo per "Choose a pattern" */
+        }
     </style>
 </head>
 <body>
+    <div class="nav-bar">
+        <a href="/login-page">Login</a>
+        <a href="/pattern">Pattern</a>
+        <a href="/signup-page">Sign Up</a>
+    </div>
+
     <h1>Welcome to Our Service</h1>
     <div id="login-content">
-        <a href="/login-page">
-            <img src="path-to-your-image.jpg" alt="Description of the image">     
-        </a>
+        <div class="checkmark-container">
+            <span>Privacy Contents</span>
+        </div>
     </div>
     <div id="pattern-content">
         <label for="pattern-select">Choose a pattern:</label>
@@ -72,7 +152,7 @@
     <div id="article-content">
         <label for="article-select">Choose an article:</label>
         <select id="article-select">
-            <option value="">Select a article</option>
+            <option value="">Select an article</option>
         </select>
         <div id="article-info">
 
@@ -97,9 +177,7 @@
         </div>
     </div>
     <div id="context-content">
-        
         <label for="context-select">Choose a context of use:</label>
-        
         <select id="context-select">
             <option value="">Select a context of use</option>
         </select>

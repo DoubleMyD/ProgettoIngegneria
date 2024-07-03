@@ -3,6 +3,7 @@ import LoggedUserView from "../views/LoggedUserPage/LoggedUserView.js";
 
 export default class LoggedUserController{
     constructor(){
+        console.log("Initializing controller");
         this.view = new LoggedUserView();
         this.LoggedUserModel = LoggedUserModel;
         this.jwt = localStorage.getItem('jwtToken');    //serve per autenticare la richiesta
@@ -12,9 +13,11 @@ export default class LoggedUserController{
     }
 
     initialize(){
+
         this.updateNotification();
 
         this.view.circleNotification.addEventListener('click', () => this.takingVision());
+        this.updateFavoritePatterns(); // Aggiunto per inizializzare i pattern preferiti
     }
 
     async updateNotification(){
@@ -47,6 +50,22 @@ export default class LoggedUserController{
             this.view.showNotificationDetails("");
         } catch (error) {
             console.error('Errore durante l\'aggiornamento delle notifiche:', error);
+        }
+    }
+
+    async updateFavoritePatterns() {
+        try {
+            const favoritePatterns = await this.LoggedUserModel.getFavoritePatterns(this.jwt, this.userId);
+
+            if (favoritePatterns) {
+                this.view.showFavoritePatterns(favoritePatterns);
+            } else {
+                console.error('Failed to retrieve favorite patterns');
+                this.view.displayError('Failed to retrieve favorite patterns');
+            }
+        } catch (error) {
+            console.error('Error displaying favorite patterns:', error);
+            this.view.displayError('Error displaying favorite patterns');
         }
     }
 

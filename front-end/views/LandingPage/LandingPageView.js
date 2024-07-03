@@ -1,6 +1,6 @@
 export default class LandingPageView{
     constructor(){
-        this.patternSelect = document.getElementById('pattern-select');
+        this.patternSelect = document.getElementById('pattern-select'); 
         this.filterPattern = document.getElementById('filter-pattern');
         this.filters = ["AllData", "MVC", "CWE", "OWASP", "ISO 9241-210 Phase", "Strategies", "Description", "Context", "Principles", "Examples"];
         
@@ -168,7 +168,7 @@ export default class LandingPageView{
 
     getRelatedMvc(data) {
         let string = "MVC : ";
-        data.attributes.mvcs.data.forEach(element => {string += element.attributes.collocazione + '    '});
+        data.attributes.mvcs.data.forEach(element => {string += element.attributes.nome + '    '});
         return string;
     }
 
@@ -192,19 +192,19 @@ export default class LandingPageView{
 
     getRelatedCwe(data){
         let string = "CWE Categories : ";
-        data.attributes.cwe_top_25_weaknesses.data.forEach(element => {string += element.attributes.weakness + '    '});
+        data.attributes.cwe_top_25_weaknesses.data.forEach(element => {string += element.attributes.nome + '    '});
         return string;
     }
 
     getRelatedGDPRArticles(data){
         let string = "GDPR Articles : ";
-        data.attributes.articoli_gdprs.data.forEach(element => {string += element.attributes.numero + " : " + element.attributes.nome + '    '});
+        data.attributes.articoli_gdprs.data.forEach(element => {string += element.attributes.identificatore + " : " + element.attributes.nome + '    '});
         return string;
     }
 
     getRelatedISOPhase(data){
         let string = "ISO 9241 210 Phases : ";
-        data.attributes.iso_9241_210_phases.data.forEach(element => {string += element.attributes.numero + " : " + element.nome + '    '});
+        data.attributes.iso_9241_210_phases.data.forEach(element => {string += element.attributes.identificatore + " : " + element.attributes.nome + '    '});
         return string;
     }
 

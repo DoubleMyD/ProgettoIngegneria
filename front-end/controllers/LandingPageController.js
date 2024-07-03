@@ -119,6 +119,7 @@ export default class LandingPageController {
             console.error('Error fetching pattern details:', error);
         }
     }
+    
     async updateStrategyDetails(strategyId){
         try{
             const strategy = await this.SearchModel.fetchStrategyDetails(strategyId);
@@ -165,6 +166,4 @@ export default class LandingPageController {
             console.error('Error fetching context details:', error);
         }
     }
-
-    //update 
 }

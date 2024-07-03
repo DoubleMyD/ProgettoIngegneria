@@ -68,6 +68,9 @@
     "notification": {
       "type": "boolean",
       "default": false
+    },
+    "favoritePatterns": {
+      "type": "string"
     }
   }
 }
