@@ -25,7 +25,9 @@ export default class FeedbackModel {
                 throw new Error(errorData.message || 'Not allowed, failed');
             }
 
+
             const data = await response.json();
+
             return data.data;
 
         } catch (error) {
@@ -52,7 +54,6 @@ export default class FeedbackModel {
 
             const userData = await userResponse.json();
 
-            console.log(userId);
             const response = await fetch(this.feedbackApiUrl, {
                 method: 'POST',
                 headers: {

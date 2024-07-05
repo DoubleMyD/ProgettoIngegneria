@@ -30,7 +30,6 @@ export default class SearchModel{
     }
 
     static async incrementSearchCounter(patternId, actualCounter){
-        console.log(actualCounter)
           try {
             const response = await fetch(`${SearchModel.patternsApiUrl}/${patternId}`, {
                 method: 'PUT',

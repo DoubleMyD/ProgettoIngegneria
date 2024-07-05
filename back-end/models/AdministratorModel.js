@@ -44,7 +44,6 @@ export default class AdministratorModel{
             body: JSON.stringify(dataObject)
         });
 
-        console.log(response);
 
         if (!response.ok) {
             // If the response is not OK, handle the error
@@ -55,7 +54,7 @@ export default class AdministratorModel{
 
         } catch (error) {
             console.error('Error during saving:', error);
-            return 'Error, make sure you are logged in to add comments';
+            return 'Error, make sure you are logged in and authorized';
         }
     }
 
@@ -103,9 +102,7 @@ export default class AdministratorModel{
              },
              body: JSON.stringify(dataObject)
          });
- 
-         console.log(response);
- 
+  
          if (!response.ok) {
              // If the response is not OK, handle the error
              const errorData = await response.json();
@@ -115,7 +112,7 @@ export default class AdministratorModel{
  
          } catch (error) {
              console.error('Error during saving:', error);
-             return 'Error, make sure you are logged in to add comments';
+             return 'Error, make sure you are logged in';
          }
      }
 

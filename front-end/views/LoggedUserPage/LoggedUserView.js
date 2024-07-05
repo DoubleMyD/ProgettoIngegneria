@@ -3,6 +3,8 @@ export default class LoggedUserView {
         this.circleNotification = document.getElementById('myCircle');
         this.notificationDetails = document.getElementById('notificationDetails'); // Assicurati che questo elemento esista nell'HTML
         this.favoritePatternsContainer = document.getElementById('favorite-patterns');
+        this.logoutButton = document.getElementById('logout-button');
+
     }
 
     updateNotificationCircle(hasNotification){

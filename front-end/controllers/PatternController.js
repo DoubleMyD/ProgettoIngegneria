@@ -19,6 +19,12 @@ export default class PatternController {
     }
 
     async initialize() {
+        if (this.jwt != null) {
+            this.view.loginButton.setAttribute('href', '/logged-user');
+            this.view.loginButton.innerText = 'account page'
+        }
+
+
         // inizializza la sezione per i 5 pattern più ricercati
         // const fivePatterns = await this.SearchModel.fetchMostFiveResearchedPattern();
         // this.view.showFivePatterns(fivePatterns);
@@ -106,8 +112,10 @@ export default class PatternController {
     async updatePatternDetails(patternId){
         try {
             const pattern = await this.SearchModel.fetchPatternDetails(patternId);
+            this.shownPatternName = pattern.attributes.nome
             this.SearchModel.incrementSearchCounter(patternId, pattern.attributes.searchCounter);
 
+        
             if (this.patternFilter === 'Examples') {
                 if (pattern.attributes.examples.data[0] === undefined || pattern.attributes.examples.data[0] === '') {
                     this.view.showInformationNotfound();
@@ -131,7 +139,7 @@ export default class PatternController {
         const response = await this.FeedbackModel.addComment(this.jwt, this.userId, 'Pattern', this.shownPatternName, comment);
         if (response === true){
             alert('Comment posted');
-            // this.updateFeedbackSection();
+            this.updateFeedbackSection();
         } else {
             alert(response);
         }

@@ -18,6 +18,7 @@ export default class LoggedUserController{
 
         this.view.circleNotification.addEventListener('click', () => this.takingVision());
         this.updateFavoritePatterns(); // Aggiunto per inizializzare i pattern preferiti
+        this.view.logoutButton.addEventListener('click', () => this.logout());
     }
 
     async updateNotification(){

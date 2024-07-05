@@ -13,6 +13,7 @@ export default class AdministratorController {
         this.LoggedUserModel = LoggedUserModel;
         this.jwt = localStorage.getItem('jwtToken');    //serve per autenticare la richiesta
         this.userId = localStorage.getItem('userId');
+
         this.parseCellContent = (cellContent) => {
             const ids = cellContent.split(',').map(item => {
                 const [id, name] = item.split(':').map(part => part.trim());
@@ -110,8 +111,12 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
-                this.savePatternRow(row);
+
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
+                    this.savePatternRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -127,8 +132,12 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
-                this.saveArticleRow(row);
+                
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
+                    this.saveArticleRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -144,8 +153,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
-                this.saveCweRow(row);
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
+                    this.saveCweRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -162,8 +174,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
                 this.saveIsoRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -180,8 +195,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
                 this.saveMvcRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -198,8 +216,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
-                this.saveOwaspRow(row);
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
+                    this.saveOwaspRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -216,8 +237,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
                 this.savePrivacyRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -234,8 +258,11 @@ export default class AdministratorController {
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
                 const row = event.target.parentElement.parentElement;
-                // @ts-ignore
-                this.saveStrategyRow(row);
+                if(localStorage.getItem('role') === 'Administrator')
+                    // @ts-ignore
+                    this.saveStrategyRow(row);
+                else
+                    alert('Make sure you are logged in and authorized')
             }
             // @ts-ignore
             else if (event.target.tagName === 'TD') {
@@ -275,7 +302,6 @@ export default class AdministratorController {
         };
 
         const response = await this.AdministratoModel.createPattern(this.jwt, payload);
-        console.log(response);
 
         if (response === true) {
             alert('Saved');

@@ -51,6 +51,8 @@ export default class AuthenticationModel {
             }
 
             const data = await response.json();
+            console.log(data)
+
             const userId = data.user.id;
             const jwt = data.jwt;
 
@@ -59,6 +61,29 @@ export default class AuthenticationModel {
         } catch (error) {
             console.error('Error during authentication:', error);
             return null;  // Return null if authentication fails
+        }
+    }
+
+    static async getRole(jwt){
+        try {
+            const userResponse = await fetch( 'http://localhost:1337/api/users/me?populate=*', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user data');
+            }
+
+            const userData = await userResponse.json();
+            return userData.role.name
+            
+        } catch (error) {
+            console.error('Error during posting comment:', error);
+            return 'Error, make sure you are logged in to add comments';
         }
     }
 

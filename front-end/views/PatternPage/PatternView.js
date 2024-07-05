@@ -3,6 +3,9 @@ export default class LandingPageView{
         //sezione 5 pattern più ricercati
         this.fivePatternsSection = document.getElementById('five-patterns-section');
         this.fivePatternButton = document.getElementById('most-researched-button');
+
+        this.loginButton = document.getElementById('login-button-link')
+    
         //sezione pattern e filtri
         this.patternSelect = document.getElementById('pattern-select');
         this.filterPattern = document.getElementById('filter-pattern');
@@ -62,6 +65,7 @@ export default class LandingPageView{
     //aggiorna i commenti da mostrare
     showFeedbackSection(comments){
         this.feedbackSection.style.display = 'block';
+        this.feedbackShow.style.display = 'block';
         this.feedbackShow.innerHTML = '';
 
         //per ogni commento crea un 'div' element apposito con le sue informazioni
@@ -192,13 +196,7 @@ export default class LandingPageView{
         data.attributes.patterns.data.forEach(pattern => string += pattern.attributes.nome + "  ,  ");
         return string;
     }
-/*
-    getRelatedPatterns(data){
-        let string = "Patterns : ";
-        data.patterns.forEach(pattern => string += pattern.nome + "  ,  ");
-        return string;
-    }
-*/
+
     //informa che l'informazione non è stata trovata
     showInformationNotfound(){
         alert("INFORMATION NOT FOUND");
@@ -214,9 +212,10 @@ export default class LandingPageView{
     //crea una singolo commento
     createCommentElement(username, comment ){
         const contenitor = document.createElement('div')
+        contenitor.classList.add('comment')
 
         this.createElement('h3', contenitor, username);
-        this.createElement('p', contenitor, comment);
+        this.createElement('p', contenitor, '  : ' + comment);
 
         this.feedbackShow.append(contenitor);
     }

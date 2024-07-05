@@ -36,10 +36,16 @@ export default class LoginPageController{
 
         const data = await this.authenticationModel.authenticateUser(email, password);
         if(data != null){
+            const role = await this.authenticationModel.getRole(data.jwt)
+
+            localStorage.setItem('role', role)
             localStorage.setItem('jwtToken', data.jwt);
             localStorage.setItem('userId', data.userId);
-            alert(data.userId);
-            window.location.href = "/logged-user";
+            
+            if(role === 'Administrator')
+                window.location.href = "/administrator"
+            else
+                window.location.href = "/logged-user";
         }
     }
 

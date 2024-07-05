@@ -13,10 +13,12 @@ export default class LoginPageView{
 
     getEmail(){
        //this.email.value;
+        // @ts-ignore
         return this.email.value;
     }
 
     getPassword(){
+        // @ts-ignore
         return this.password.value;
     }
 
