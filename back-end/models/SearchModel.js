@@ -131,7 +131,7 @@ export default class SearchModel{
         const data = await response.json();
         return data.data;
     }
-
+/*
     static async addToFavorites(jwt, userId, patternId) {
         try {
             // Fetch user information to get current favoritePatterns string
@@ -155,6 +155,9 @@ export default class SearchModel{
             if (favoritePatternsString.includes(patternIdString)) {
                 throw new Error('Pattern is already in favorites');
             }
+
+            if(favoritePatternsString.split('#').filter(patternId => patternId).length > 4)
+                return 'You already have 5 patterns, delete one first'
 
             // Add patternId to favoritePatternsString
             if (favoritePatternsString) {
@@ -182,9 +185,8 @@ export default class SearchModel{
             console.error('Error adding to favorites:', error);
             return error.message;
         }
-    
     }
-
+*/
 /*    static async fetchStrategias(){
         const response = await fetch(`${this.strapiUrl}/api/strategias?populate=*`);
         const data = await response.json();

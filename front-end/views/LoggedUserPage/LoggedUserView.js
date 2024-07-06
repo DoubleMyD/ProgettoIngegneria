@@ -8,7 +8,7 @@ export default class LoggedUserView {
     }
 
     updateNotificationCircle(hasNotification){
-        console.log(hasNotification + " circle : " + this.circleNotification);
+        //console.log(hasNotification + " circle : " + this.circleNotification);
         if(hasNotification){
             this.circleNotification.style.fill= 'red';//red
         }
@@ -18,12 +18,12 @@ export default class LoggedUserView {
     }
 
     showNotificationDetails(details){
-        console.log("Showing notification details:", details);
+        //console.log("Showing notification details:", details);
         this.notificationDetails.textContent = details;
         this.notificationDetails.style.display = details ? 'block' : 'none'; // Mostra o nasconde i dettagli della notifica
     }
     
-    showFavoritePatterns(patterns) {
+    showFavoritePatterns(patterns, deleteFunc) {
         // Pulisci il contenitore dei pattern preferiti
         this.favoritePatternsContainer.innerHTML = '';
 
@@ -34,10 +34,11 @@ export default class LoggedUserView {
 
         // Crea un elenco di pattern preferiti
         const ul = document.createElement('ul');
-        patterns.forEach(patternId => {
-            const li = document.createElement('li');
+        patterns.forEach(pattern => {
+            /*const li = document.createElement('li');
             li.textContent = `Pattern ID: ${patternId}`; // Puoi personalizzare questo per mostrare più dettagli
-            ul.appendChild(li);
+            ul.appendChild(li);*/
+            this.createFavoriteElement(pattern.id, pattern.attributes.nome, deleteFunc)
             
         });
 
@@ -47,5 +48,29 @@ export default class LoggedUserView {
     // Metodo per mostrare messaggi di errore
     displayError(message) {
         this.favoritePatternsContainer.innerHTML = `<p>${message}</p>`;
+    }
+
+    //crea una singolo commento
+    createFavoriteElement(patternId, nomePattern, deleteFunc){
+        const contenitor = document.createElement('a');
+        //contenitor.classList.add('comment')
+        contenitor.setAttribute('href', `/pattern?patternId=${patternId}`);
+        this.createElement('h3', contenitor, nomePattern);
+        
+        const button = this.createElement('button', contenitor, 'DELETE');
+        button.addEventListener('click', (event) => {
+            event.preventDefault(); // Prevents the default behavior of the anchor tag
+            deleteFunc(patternId);
+        });
+
+        this.favoritePatternsContainer.append(contenitor);
+    }
+
+    //crea gli elementi dinamicamente
+    createElement(typeOfElement, contenitor, text){
+        const newElement = document.createElement(typeOfElement);
+        newElement.textContent = text;
+        contenitor.appendChild(newElement);
+        return newElement;
     }
 }

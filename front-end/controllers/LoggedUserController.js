@@ -1,4 +1,5 @@
 import LoggedUserModel from '../../back-end/models/LoggedUserModel.js';
+import SearchModel from '../../back-end/models/SearchModel.js';
 import LoggedUserView from "../views/LoggedUserPage/LoggedUserView.js";
 
 export default class LoggedUserController{
@@ -6,6 +7,7 @@ export default class LoggedUserController{
         console.log("Initializing controller");
         this.view = new LoggedUserView();
         this.LoggedUserModel = LoggedUserModel;
+        this.SearchModel = SearchModel;
         this.jwt = localStorage.getItem('jwtToken');    //serve per autenticare la richiesta
         this.userId = localStorage.getItem('userId');
         
@@ -59,7 +61,15 @@ export default class LoggedUserController{
             const favoritePatterns = await this.LoggedUserModel.getFavoritePatterns(this.jwt, this.userId);
 
             if (favoritePatterns) {
-                this.view.showFavoritePatterns(favoritePatterns);
+
+                let patterns = new Array(favoritePatterns.length)
+
+                for(let i=0; i < favoritePatterns.length; i++){
+                    patterns[i] = await this.SearchModel.fetchPatternDetails(favoritePatterns[i]);
+                }
+
+                this.view.showFavoritePatterns(patterns, (patternId) => this.deleteFavoritePattern(patternId));
+
             } else {
                 console.error('Failed to retrieve favorite patterns');
                 this.view.displayError('Failed to retrieve favorite patterns');
@@ -67,6 +77,21 @@ export default class LoggedUserController{
         } catch (error) {
             console.error('Error displaying favorite patterns:', error);
             this.view.displayError('Error displaying favorite patterns');
+        }
+    }
+
+    async deleteFavoritePattern(patternId) {
+        try {
+            const success = await this.LoggedUserModel.deleteFavorite(this.jwt, this.userId, patternId);
+            if (success === true) {
+                await this.updateFavoritePatterns(); // Update the favorites list after deletion
+                alert('Elimination successful')
+            } else {
+                alert('Error: ' + success);
+            }
+        } catch (error) {
+            console.error('Error deleting favorite pattern:', error);
+            alert('Error deleting favorite pattern');
         }
     }
 

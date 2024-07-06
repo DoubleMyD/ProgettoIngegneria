@@ -109,6 +109,105 @@ export default class LoggedUserModel{
         }
     }
 
+    static async addToFavorites(jwt, userId, patternId) {
+        try {
+            // Fetch user information to get current favoritePatterns string
+            const userResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user information');
+            }
+
+            const userData = await userResponse.json();
+            let favoritePatternsString = userData.favoritePatterns || '';
+
+            // Check if patternId already exists in favoritePatternsString
+            const patternIdString = patternId.toString();
+            const patternSeparator = '#';
+
+            if (favoritePatternsString.includes(patternIdString)) {
+                throw new Error('Pattern is already in favorites');
+            }
+
+            if(favoritePatternsString.split('#').filter(patternId => patternId).length > 4)
+                return 'You already have 5 patterns, delete one first'
+
+            // Add patternId to favoritePatternsString
+            if (favoritePatternsString) {
+                favoritePatternsString += `${patternSeparator}${patternIdString}`;
+            } else {
+                favoritePatternsString = patternIdString;
+            }
+
+            // Update user with new favoritePatternsString
+            const updateResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ favoritePatterns: favoritePatternsString })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error('Failed to update favorite patterns');
+            }
+
+            return true; // Success
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+            return error.message;
+        }
+    }
+
+    static async deleteFavorite(jwt, userId, patternId) {
+        try {
+            // Fetch user information to get current favoritePatterns string
+            const userResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${jwt}`
+                }
+            });
+
+            if (!userResponse.ok) {
+                throw new Error('Failed to fetch user information');
+            }
+
+            const userData = await userResponse.json();
+            let favoritePatternsString = userData.favoritePatterns || '';
+
+            let favorites = favoritePatternsString.split('#').filter(id => id);
+            // Remove the patternId from the array
+            favorites = favorites.filter(id => id !== patternId.toString());
+
+            // Construct the new favoritePatternsString
+            favoritePatternsString = favorites.join('#');
+
+            // Update user with new favoritePatternsString
+            const updateResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${jwt}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ favoritePatterns: favoritePatternsString })
+            });
+
+            if (!updateResponse.ok) {
+                throw new Error('Failed to update favorite patterns');
+            }
+
+            return true; // Success
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+            return error.message;
+        }
+    }
+
 }
 
 

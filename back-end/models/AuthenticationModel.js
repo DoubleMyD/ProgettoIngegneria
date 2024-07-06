@@ -51,7 +51,6 @@ export default class AuthenticationModel {
             }
 
             const data = await response.json();
-            console.log(data)
 
             const userId = data.user.id;
             const jwt = data.jwt;

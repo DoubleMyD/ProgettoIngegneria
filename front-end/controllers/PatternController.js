@@ -1,16 +1,18 @@
 import SearchModel from '../../back-end/models/SearchModel.js';
 import FeedbackModel from '../../back-end/models/FeedbackModel.js';
 import PatternView from '../views/PatternPage/PatternView.js';
+import LoggedUserModel from '../../back-end/models/LoggedUserModel.js';
 
 export default class PatternController {
     patternId;
     patternFilter = "AllData";
     shownPatternName;
-
+    
     constructor() {
         this.view = new PatternView();
         this.SearchModel = SearchModel;
         this.FeedbackModel = FeedbackModel;
+        this.LoggedUserModel = LoggedUserModel;
         this.jwt = localStorage.getItem('jwtToken');    // serve per autenticare la richiesta
         this.userId = localStorage.getItem('userId');   // serve per passare le informazioni dello user nelle relazioni dei commentifeedback
         this.inputFrom = 'Pattern'; // serve per i commenti, per sapere a quale "categoria" appartengono e in base a quello fare effettuare la ricerca ( non è indispensabile ma dà una maggiore comprensibilità)
@@ -56,9 +58,17 @@ export default class PatternController {
 
         // aggiungi l'evento per il bottone "Add to Favorites"
         //const addToFavoritesButton = document.getElementById('add-to-favorites-button');
+        
         this.view.addToFavoritesButton.addEventListener('click', async () => this.addToFavorites());
 
-
+        const urlParams = new URLSearchParams(window.location.search);
+        this.patternId = urlParams.get('patternId');
+        if (this.patternId) {
+            // @ts-ignore
+            this.view.patternSelect.value = this.patternId;
+            await this.updatePatternDetails(this.patternId);
+            await this.updateFeedbackSection();
+        }
     }
 
     async showFivePattern(){
@@ -146,11 +156,15 @@ export default class PatternController {
     }
 
     async addToFavorites() {
+        if(this.jwt === null){
+            alert('Make sure to loggin before')
+            return
+        }
         // @ts-ignore
         const selectedPattern = this.view.patternSelect.value;
         if (selectedPattern !== "Select a pattern") {
             try {
-                const response = await this.SearchModel.addToFavorites(this.jwt, this.userId, this.patternId);
+                const response = await this.LoggedUserModel.addToFavorites(this.jwt, this.userId, this.patternId);
                 if (response === true) {
                     alert(`${selectedPattern} has been added to your favorites!`);
                    // this.favoritePatterns.push(selectedPattern);

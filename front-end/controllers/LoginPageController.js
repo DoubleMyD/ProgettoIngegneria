@@ -11,17 +11,17 @@ export default class LoginPageController{
              event.preventDefault();
              await this.login(); 
         });
-
+/*
         this.view.logoutButton.addEventListener('click', async (event) => {
             event.preventDefault();
             await this.logout(); 
        });
+*/
     }
 
     async login(){
         const email = this.view.getEmail();
         const password = this.view.getPassword();
-        this.view.showSyntaxError(email);
 
         if(!this.authenticationModel.emailSyntaxCorrect(email)){
             this.view.showSyntaxError('Email syntax is not correct');
@@ -32,7 +32,6 @@ export default class LoginPageController{
             this.view.showSyntaxError('Password syntax is not correct');
             return;
         }
-        this.view.showSyntaxError(password);
 
         const data = await this.authenticationModel.authenticateUser(email, password);
         if(data != null){
@@ -48,10 +47,11 @@ export default class LoginPageController{
                 window.location.href = "/logged-user";
         }
     }
-
+/*
     logout(){
         localStorage.removeItem('jwtToken');
         alert('logout successful');
         window.location.href = "/landing-page";
     }
+*/
 }

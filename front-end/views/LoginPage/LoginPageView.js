@@ -22,5 +22,4 @@ export default class LoginPageView{
         return this.password.value;
     }
 
-
 }
