@@ -20,19 +20,22 @@
             width: 80%;
             margin-top: 20px;
         }
-        #pattern-info, #feedback-show{
+        #pattern-info, #feedback-show {
             border: 1px solid #5a0f0f;
             padding: 10px;
             margin-top: 20px;
             display: none;
         }
-        .comment{
+        .comment {
             border: 1px solid #ed2e2e7a;
             padding: 5px;
             margin-top: 20px;
             display: flex;
         }
         .favorite-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-top: 10px;
         }
         .button {
@@ -45,6 +48,8 @@
             font-size: 16px;
             margin-top: 10px;
             text-align: center;
+            text-decoration: none; /* Rimuove la sottolineatura */
+            display: inline-block; /* Mostra come blocco inline */
         }
         .button:hover {
             background-color: #0056b3;
@@ -53,10 +58,13 @@
             display: flex;
             justify-content: space-between;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 10px; 
         }
         #controls label, #controls select {
             margin-right: 10px;
+        }
+        #five-patterns-section {
+            margin-top: 10px; 
         }
     </style>
 </head>
@@ -64,29 +72,26 @@
     <h1>PATTERNS !!!!!!</h1>
     <div id="pattern-content">
         <a id='login-button-link' href="/login-page">
-            <button id="login-button" class="button">login page</button>
+            <button id="login-button" class="button">Login page</button>
         </a>
+        <div id="pattern-buttons">
+            <a href="/landing-page" class="button">Landing page</a>
+        </div>
         <div id="five-patterns-section">
             <button id="most-researched-button" class="button">Most Researched Patterns</button>
         </div>
         <div id="controls">
-            <label for="pattern-select">Choose a pattern:</label>
-        <div class="favorite-section">
-            <select id="pattern-select">
-                <option value="Select a pattern">Select a pattern</option>
-            </select>
-            <button id="add-to-favorites-button">Add to favorites</button>
-        
-            </select>
-            <label for="filter-pattern">Select a filter : </label>
-            <select id="filter-pattern">
-                <option value="">Select a filter</option>
-            </select>
-        </div>
-        <div id="pattern-buttons">
-            <a href="/landing-page">
-                <button id="landing-page-button" class="button">landing page</button>
-            </a>
+            <div class="favorite-section">
+                <label for="pattern-select">Choose a pattern:</label>
+                <select id="pattern-select">
+                    <option value="Select a pattern">Select a pattern</option>
+                </select>
+                <button id="add-to-favorites-button" class="button">Add to favorites</button>
+                <label for="filter-pattern">Select a filter:</label>
+                <select id="filter-pattern">
+                    <option value="">Select a filter</option>
+                </select>
+            </div>
         </div>
         <div id="pattern-info">
            
@@ -109,15 +114,16 @@
         </div>
     </div>
     
-    
     <script type="module">
-        import PatternController from '././front-end/controllers/PatternController.js';
+        import PatternController from './front-end/controllers/PatternController.js';
        
         document.addEventListener('DOMContentLoaded', () => {
             const patternController = new PatternController();
-            //document.getElementById('add-to-favorites-button').addEventListener('click', () => patternController.addToFavorites());
+            document.getElementById('most-researched-button').addEventListener('click', () => {
+                patternController.loadMostResearchedPatterns();
+            });
         });
-
+    
     </script>
 </body>
 </html>
