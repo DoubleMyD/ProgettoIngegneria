@@ -23,7 +23,8 @@ export default class PatternController {
     async initialize() {
         if (this.jwt != null) {
             this.view.loginButton.setAttribute('href', '/logged-user');
-            this.view.loginButton.innerText = 'account page'
+            this.view.loginButton.innerText = 'Account page';
+            this.view.loginButton.classList.add('button'); // Aggiunge la classe per lo stile del bottone
         }
 
 
