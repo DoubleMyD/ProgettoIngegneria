@@ -40,7 +40,7 @@ export default class PatternController {
         this.initAddCommentSectionLogic();
 
         // quando si seleziona una nuova voce dal menù a tendina, ricerca le informazioni
-        this.view.patternSelect.addEventListener('change', async (event) => {
+        this.view.patternSelect.addEventListener('change', async (event) =>  /*this.updateFeedbackAndPattern(event)*/{
             const target = event.target;
             if (target instanceof HTMLSelectElement) {
                 this.patternId = target.value;
@@ -70,6 +70,19 @@ export default class PatternController {
             await this.updateFeedbackSection();
         }
     }
+
+    /*async updateFeedbackAndPattern(event){
+        const target = event.target;
+            if (target instanceof HTMLSelectElement) {
+                this.patternId = target.value;
+                if (this.patternId) {
+                    // aggiorna le informazioni del pattern
+                    await this.updatePatternDetails(this.patternId);
+                    // aggiorna i commenti in base al pattern scelto
+                    await this.updateFeedbackSection();
+                }
+            }
+    }*/
 
     async showFivePattern(){
         const fivePatterns = await this.SearchModel.fetchMostFiveResearchedPattern();
@@ -125,7 +138,6 @@ export default class PatternController {
             this.shownPatternName = pattern.attributes.nome
             this.SearchModel.incrementSearchCounter(patternId, pattern.attributes.searchCounter);
 
-        
             if (this.patternFilter === 'Examples') {
                 if (pattern.attributes.examples.data[0] === undefined || pattern.attributes.examples.data[0] === '') {
                     this.view.showInformationNotfound();

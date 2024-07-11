@@ -32,13 +32,15 @@ export default class LandingPageController {
             }
         });
 
-        this.view.filterPattern.addEventListener('change', async (event) => {
+        this.view.filterPattern.addEventListener('change', async (event) => this.filter(event)/*{  
             const target = event.target;
             if(target instanceof HTMLSelectElement){
                 this.patternFilter = target.value;
                 this.updatePatternDetails(this.patternId);
             }
-        });
+        }*/);
+
+        
 
         this.view.strategySelect.addEventListener('change', async (event) => {
             const target = event.target;
@@ -101,19 +103,28 @@ export default class LandingPageController {
         
     }
 
+    async filter(event){
+        const target = event.target;
+        if (target instanceof HTMLSelectElement) {
+            this.patternFilter = target.value;
+            await this.updatePatternDetails(this.patternId);
+        }
+    }
+
     async updatePatternDetails(patternId){
         try{
             const pattern = await this.SearchModel.fetchPatternDetails(patternId);
             this.SearchModel.incrementSearchCounter(patternId, pattern.attributes.searchCounter);
-
+            
             if(this.patternFilter === 'Examples'){
                 if(pattern.attributes.examples.data[0] === undefined || pattern.attributes.examples.data[0] === ''){
                     this.view.showInformationNotfound();
                     return;
                 }
             }
+            
             this.view.updatePatternSection(this.patternFilter, pattern);
-
+            
 
         }catch(error){
             console.error('Error fetching pattern details:', error);
