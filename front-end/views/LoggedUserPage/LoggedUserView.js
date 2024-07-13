@@ -23,7 +23,7 @@ export default class LoggedUserView {
         this.notificationDetails.style.display = details ? 'block' : 'none'; // Mostra o nasconde i dettagli della notifica
     }
     
-    showFavoritePatterns(patterns, deleteFunc) {
+    showFavoritePatterns(patterns, redirectFunc ,deleteFunc) {
         // Pulisci il contenitore dei pattern preferiti
         this.favoritePatternsContainer.innerHTML = '';
 
@@ -38,7 +38,7 @@ export default class LoggedUserView {
             /*const li = document.createElement('li');
             li.textContent = `Pattern ID: ${patternId}`; // Puoi personalizzare questo per mostrare più dettagli
             ul.appendChild(li);*/
-            this.createFavoriteElement(pattern.id, pattern.attributes.nome, deleteFunc)
+            this.createFavoriteElement(pattern.id, pattern.attributes.nome, redirectFunc, deleteFunc)
             
         });
 
@@ -51,10 +51,12 @@ export default class LoggedUserView {
     }
 
     //crea una singolo commento
-    createFavoriteElement(patternId, nomePattern, deleteFunc){
+    createFavoriteElement(patternId, nomePattern, redirectFunc, deleteFunc){
         const contenitor = document.createElement('a');
         //contenitor.classList.add('comment')
-        contenitor.setAttribute('href', `/pattern?patternId=${patternId}`);
+        //contenitor.setAttribute('href', `/pattern?patternId=${patternId}`);
+        contenitor.style.cursor = 'pointer';
+        contenitor.addEventListener('click', (event) => redirectFunc(patternId));
         this.createElement('h3', contenitor, nomePattern);
         
         const button = this.createElement('button', contenitor, 'DELETE');

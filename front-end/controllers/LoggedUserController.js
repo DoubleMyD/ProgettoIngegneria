@@ -68,7 +68,7 @@ export default class LoggedUserController{
                     patterns[i] = await this.SearchModel.fetchPatternDetails(favoritePatterns[i]);
                 }
 
-                this.view.showFavoritePatterns(patterns, (patternId) => this.deleteFavoritePattern(patternId));
+                this.view.showFavoritePatterns(patterns, (patternId) => this.redirectToPatternInfo(patternId), (patternId) => this.deleteFavoritePattern(patternId));
 
             } else {
                 console.error('Failed to retrieve favorite patterns');
@@ -78,6 +78,10 @@ export default class LoggedUserController{
             console.error('Error displaying favorite patterns:', error);
             this.view.displayError('Error displaying favorite patterns');
         }
+    }
+
+    redirectToPatternInfo (patternId){
+        window.location.href = "/pattern?patternId=" + patternId;
     }
 
     async deleteFavoritePattern(patternId) {
