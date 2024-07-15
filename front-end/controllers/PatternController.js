@@ -55,7 +55,7 @@ export default class PatternController {
         });
 
         // quando si seleziona un filtro, aggiorna le voci da mostrare
-        this.view.filterPattern.addEventListener('change', async (event) => this.filter(event));
+        //this.view.filterPattern.addEventListener('change', async (event) => this.filter(event));
 
         // aggiungi l'evento per il bottone "Add to Favorites"
         //const addToFavoritesButton = document.getElementById('add-to-favorites-button');
@@ -90,6 +90,7 @@ export default class PatternController {
         this.view.showFivePatterns(fivePatterns);
     }
 
+    /*
     async filter(event){
         const target = event.target;
         if (target instanceof HTMLSelectElement) {
@@ -97,7 +98,7 @@ export default class PatternController {
             await this.updatePatternDetails(this.patternId);
             await this.updateFeedbackSection();
         }
-    }
+    }*/
 
     // inizializza i listener (servono a capire quando avviene un evento (mouse, bottone, ecc.))
     initAddCommentSectionLogic() {

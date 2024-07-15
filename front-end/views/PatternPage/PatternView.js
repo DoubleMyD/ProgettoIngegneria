@@ -8,8 +8,8 @@ export default class LandingPageView{
     
         //sezione pattern e filtri
         this.patternSelect = document.getElementById('pattern-select');
-        this.filterPattern = document.getElementById('filter-pattern');
-        this.filters = ["AllData", "MVC", "CWE", "OWASP", "ISO 9241-210 Phase", "Strategies", "Description", "Context", "Principles", "Examples"];
+        //this.filterPattern = document.getElementById('filter-pattern');
+        //this.filters = ["AllData", "MVC", "CWE", "OWASP", "ISO 9241-210 Phase", "Strategies", "Description", "Context", "Principles", "Examples"];
         
         this.patternInfo = document.getElementById('pattern-info');
     
@@ -36,7 +36,7 @@ export default class LandingPageView{
     //popula i menù a tendina
     initialize(patterns){
         this.populateDropdown(patterns, this.patternSelect);
-        this.filters.forEach(filter => { this.createElement('option', this.filterPattern, filter)});
+        //this.filters.forEach(filter => { this.createElement('option', this.filterPattern, filter)});
     }
 
     showAddCommentSection(boolean){
@@ -78,7 +78,8 @@ export default class LandingPageView{
         this.patternInfo.style.display = 'block';
 
         this.createElement('h2', this.patternInfo, this.getName(pattern));  
-        switch(filter){
+        this.showPatternData(pattern);
+        /*switch(filter){
             case this.filters[0]:
                 this.showPatternData(pattern);
                 break;
@@ -111,7 +112,7 @@ export default class LandingPageView{
                 break;                  
             default: 
                 this.patternInfo.style.display = 'none'; 
-        }
+        }*/
     }
 
     showPatternData(pattern){

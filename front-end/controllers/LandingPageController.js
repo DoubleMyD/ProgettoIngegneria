@@ -9,11 +9,17 @@ export default class LandingPageController {
     constructor() {
         this.view = new LandingPageView();
         this.SearchModel = SearchModel;
-
+        this.jwt = localStorage.getItem('jwtToken');    // serve per autenticare la richiesta
         this.initialize();
     }
 
     async initialize() {
+        if (this.jwt != null) {
+            this.view.loginButton.setAttribute('href', '/logged-user');
+            this.view.loginButton.innerText = 'Account page';
+            this.view.loginButton.classList.add('button'); // Aggiunge la classe per lo stile del bottone
+        }
+
         const patterns = await this.SearchModel.fetchPatterns();
         const strategies = await this.SearchModel.fetchStrategies();
         const articles = await this.SearchModel.fetchArticles();

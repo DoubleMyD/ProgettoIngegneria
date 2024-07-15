@@ -1,5 +1,7 @@
 export default class LandingPageView{
     constructor(){
+        this.loginButton = document.getElementById('login-button-link')
+
         this.patternSelect = document.getElementById('pattern-select'); 
         this.filterPattern = document.getElementById('filter-pattern');
         this.filters = ["AllData", "MVC", "CWE", "OWASP", "ISO 9241-210 Phase", "Strategies", "Description", "Context", "Principles", "Examples"];
