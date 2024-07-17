@@ -79,40 +79,6 @@ export default class LandingPageView{
 
         this.createElement('h2', this.patternInfo, this.getName(pattern));  
         this.showPatternData(pattern);
-        /*switch(filter){
-            case this.filters[0]:
-                this.showPatternData(pattern);
-                break;
-            case this.filters[1]:
-                this.createElement('p', this.patternInfo, this.getRelatedMvc(pattern));  
-                break;
-            case this.filters[2]:
-                this.createElement('p', this.patternInfo, this.getRelatedCwe(pattern));  
-                break;
-            case this.filters[3]:
-                this.createElement('p', this.patternInfo, this.getRelatedOwasp(pattern));  
-                break;
-            case this.filters[4]:
-                this.createElement('p', this.patternInfo, this.getRelatedISOPhase(pattern));  
-                break;  
-            case this.filters[5]:
-                this.createElement('p', this.patternInfo, this.getRelatedStrategies(pattern));  
-                break;       
-            case this.filters[6]:
-                this.createElement('p', this.patternInfo, this.getDescription(pattern));  
-                break;
-            case this.filters[7]:
-                this.createElement('p', this.patternInfo, this.getContext(pattern));  
-                break;   
-            case this.filters[8]:
-                this.createElement('p', this.patternInfo, this.getRelatedPrinciples(pattern));  
-                break;  
-            case this.filters[9]:
-                this.createElement('p', this.patternInfo, this.getRelatedExamples(pattern));  
-                break;                  
-            default: 
-                this.patternInfo.style.display = 'none'; 
-        }*/
     }
 
     showPatternData(pattern){

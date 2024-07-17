@@ -12,9 +12,6 @@ export default class AdministratorView {
         this.privacyTable = document.getElementById('Privacy-table');
         this.strategyTable = document.getElementById('Strategy-table');
 
-        //this.toggleTables = [document.getElementById('togglePatternTable'), document.getElementById('toggleArticleTable'), document.getElementById('toggleCWETable'), document.getElementById('toggleISOTable'), document.getElementById('toggleMVCTable'), document.getElementById('toggleOWASPTable'), document.getElementById('togglePrivacyTable'), document.getElementById('toggleStrategyTable')];
-        //this.filterPattern = document.getElementById('operation');
-
         this.bPattern = document.getElementById('b-pattern');
         this.bArticle = document.getElementById('b-article');
         this.bCwe = document.getElementById('b-cwe');
@@ -23,8 +20,6 @@ export default class AdministratorView {
         this.bOwasp = document.getElementById('b-owasp');
         this.bPrivacy = document.getElementById('b-privacy');
         this.bStrategy = document.getElementById('b-strategy');
-
-        //this.buttons = [this.bPattern, this.bArticle, this.bCwe, this.bStrategy];
     }
 
     initialize(patterns, articles, CWE, ISO, MVC, OWASP, Privacy, Strategy) {
@@ -161,20 +156,6 @@ export default class AdministratorView {
             }
         });
 
-        /*
-        select.addEventListener('change', () => {
-
-            if (cell.innerText.trim() === "") {
-                cell.innerText = select.value;
-            } else {
-                cell.innerText += `, ${select.value}`; // Append the selected value to the cell content
-            }
-            dropdown.remove();
-            document.getElementById('delete-dropdown').remove();
-        });
-        */
-
-
         dropdown.appendChild(select);
         document.body.appendChild(dropdown);
 
@@ -226,19 +207,6 @@ export default class AdministratorView {
             }
         });
 
-        /*
-            select.addEventListener('change', () => {
-                const selectedValue = select.value;
-        
-                // Remove the selected value from the cell content
-                const values = cell.innerText.split(',').map(value => value.trim());
-                const newValues = values.filter(value => value !== selectedValue);
-                cell.innerText = newValues.join(', ');
-        
-                dropdown.remove();
-                document.getElementById('add-dropdown').remove();
-            });
-        */
         dropdown.appendChild(select);
         document.body.appendChild(dropdown);
 
@@ -290,24 +258,5 @@ export default class AdministratorView {
         // Add event listener for form submission
         //form.addEventListener('submit', (event) => {this.handleFormSubmit(event); form.remove()});
     }
-/*
-    handleFormSubmit(event) {
-        event.preventDefault(); // Prevent the form from submitting normally
 
-        // Get form data
-        const formData = new FormData(event.target);
-        const payload = {
-            data: {
-                nome: formData.get('nome'),
-                descrizione: formData.get('descrizione'),
-                contesto: formData.get('contesto'),
-                examples: formData.get('examples')
-            }
-        };
-
-        console.log('Payload:', payload);
-
-        // Optionally, you can perform further actions such as sending the payload to the server
-        // Example: savePattern(payload);
-    }*/
 }

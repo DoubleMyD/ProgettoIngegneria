@@ -27,9 +27,6 @@ export default class PatternController {
             this.view.loginButton.classList.add('button'); // Aggiunge la classe per lo stile del bottone
         }
 
-
-        // inizializza la sezione per i 5 pattern più ricercati
-        // const fivePatterns = await this.SearchModel.fetchMostFiveResearchedPattern();
         // this.view.showFivePatterns(fivePatterns);
         this.view.fivePatternButton.addEventListener('click', async (event) => this.showFivePattern());
 
@@ -53,12 +50,6 @@ export default class PatternController {
                 }
             }
         });
-
-        // quando si seleziona un filtro, aggiorna le voci da mostrare
-        //this.view.filterPattern.addEventListener('change', async (event) => this.filter(event));
-
-        // aggiungi l'evento per il bottone "Add to Favorites"
-        //const addToFavoritesButton = document.getElementById('add-to-favorites-button');
         
         this.view.addToFavoritesButton.addEventListener('click', async () => this.addToFavorites());
 
@@ -72,33 +63,11 @@ export default class PatternController {
         }
     }
 
-    /*async updateFeedbackAndPattern(event){
-        const target = event.target;
-            if (target instanceof HTMLSelectElement) {
-                this.patternId = target.value;
-                if (this.patternId) {
-                    // aggiorna le informazioni del pattern
-                    await this.updatePatternDetails(this.patternId);
-                    // aggiorna i commenti in base al pattern scelto
-                    await this.updateFeedbackSection();
-                }
-            }
-    }*/
-
     async showFivePattern(){
         const fivePatterns = await this.SearchModel.fetchMostFiveResearchedPattern();
         this.view.showFivePatterns(fivePatterns);
     }
 
-    /*
-    async filter(event){
-        const target = event.target;
-        if (target instanceof HTMLSelectElement) {
-            this.patternFilter = target.value;
-            await this.updatePatternDetails(this.patternId);
-            await this.updateFeedbackSection();
-        }
-    }*/
 
     // inizializza i listener (servono a capire quando avviene un evento (mouse, bottone, ecc.))
     initAddCommentSectionLogic() {

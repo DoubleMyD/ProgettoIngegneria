@@ -6,7 +6,6 @@ export default class SearchModel{
     static isoPhasesApiUrl = 'http://localhost:1337/api/iso-9241-210-phases';
     static strapiUrl = 'http://localhost:1337';
     static strapiUserUrl = 'http://localhost:1337/api/users'
-    //static contextApiUrl = ""; //cosa metto come link? 
 
     static async fetchPatterns() {
         const response = await fetch(SearchModel.patternsApiUrl + '?populate=*&pagination[page]=1&pagination[pageSize]=50');
@@ -131,66 +130,5 @@ export default class SearchModel{
         const data = await response.json();
         return data.data;
     }
-/*
-    static async addToFavorites(jwt, userId, patternId) {
-        try {
-            // Fetch user information to get current favoritePatterns string
-            const userResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
-                headers: {
-                    'Authorization': `Bearer ${jwt}`
-                }
-            });
 
-            if (!userResponse.ok) {
-                throw new Error('Failed to fetch user information');
-            }
-
-            const userData = await userResponse.json();
-            let favoritePatternsString = userData.favoritePatterns || '';
-
-            // Check if patternId already exists in favoritePatternsString
-            const patternIdString = patternId.toString();
-            const patternSeparator = '#';
-
-            if (favoritePatternsString.includes(patternIdString)) {
-                throw new Error('Pattern is already in favorites');
-            }
-
-            if(favoritePatternsString.split('#').filter(patternId => patternId).length > 4)
-                return 'You already have 5 patterns, delete one first'
-
-            // Add patternId to favoritePatternsString
-            if (favoritePatternsString) {
-                favoritePatternsString += `${patternSeparator}${patternIdString}`;
-            } else {
-                favoritePatternsString = patternIdString;
-            }
-
-            // Update user with new favoritePatternsString
-            const updateResponse = await fetch(`${this.strapiUserUrl}/${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${jwt}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ favoritePatterns: favoritePatternsString })
-            });
-
-            if (!updateResponse.ok) {
-                throw new Error('Failed to update favorite patterns');
-            }
-
-            return true; // Success
-        } catch (error) {
-            console.error('Error adding to favorites:', error);
-            return error.message;
-        }
-    }
-*/
-/*    static async fetchStrategias(){
-        const response = await fetch(`${this.strapiUrl}/api/strategias?populate=*`);
-        const data = await response.json();
-        return data.data;
-    }
-*/
 }

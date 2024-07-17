@@ -35,9 +35,6 @@ export default class LoggedUserView {
         // Crea un elenco di pattern preferiti
         const ul = document.createElement('ul');
         patterns.forEach(pattern => {
-            /*const li = document.createElement('li');
-            li.textContent = `Pattern ID: ${patternId}`; // Puoi personalizzare questo per mostrare più dettagli
-            ul.appendChild(li);*/
             this.createFavoriteElement(pattern.id, pattern.attributes.nome, redirectFunc, deleteFunc)
             
         });

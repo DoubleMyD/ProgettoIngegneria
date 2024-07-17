@@ -86,49 +86,6 @@ export default class AuthenticationModel {
         }
     }
 
-    /*
-    static async getUserData(email){
-        const response = await fetch(AuthenticationModel.userApiUrl);
-        const users = await response.json();
-        return users.find(user => user.email === email);
-    }
-
-    static async authenticateEmail(email) {
-            const response = await fetch(AuthenticationModel.userApiUrl);
-            const users = await response.json();
-        
-            for(let user of users){
-                if(user.email === email)
-                    return user.email;
-            }
-
-            return false;
-    }
-
-    static async authenticateUsername(userName) {
-        const response = await fetch(AuthenticationModel.userApiUrl);
-        const users = await response.json();
-        
-        for(let user of users){
-            if(user.username === userName)
-                return user.username;
-        }
-
-        return false;
-    }
-
-    static async authenticatePassword(email, password){
-        const response = await fetch(`${AuthenticationModel.userWithPasswordApiUrl}/${email}`);
-        const user = await response.json();
-
-        const hashedPassword = await this.bcrypt.hash(password, 10);
-        if(hashedPassword === user.password)
-            return true;
-        else
-            return false;
-    }*/
-
-
     static emailSyntaxCorrect(email) {
         //se va bene
         return true;

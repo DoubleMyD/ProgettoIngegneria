@@ -88,15 +88,6 @@ export default class LandingPageController {
             }
         });
 
-
-        /*this.view.contextSelect.addEventListener('change', async (event) => {
-            const target = event.target;
-            if(target instanceof HTMLSelectElement){
-                this.contextPattern = target.value;
-                this.updatePatternDetails(this.patternId);
-            }
-        });*/
-
         this.view.contextSelect.addEventListener('change', async (event) => {
             const target = event.target;
             if(target instanceof HTMLSelectElement){

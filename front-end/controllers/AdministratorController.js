@@ -94,19 +94,6 @@ export default class AdministratorController {
 
 
         this.view.patternTable.addEventListener('click', (event) => {
-            /*const cell = event.target;
-            // @ts-ignore
-            const rowIndex = cell.parentElement.rowIndex;
-            // @ts-ignore
-            const cellIndex = cell.cellIndex;
-            // @ts-ignore
-            const cellContent = cell.innerText;
-    
-            // @ts-ignore
-            if (cell.tagName === 'TD') {
-                //alert(rowIndex +' '+ cellIndex + cellContent);
-            }*/
-            
             // @ts-ignore
             if (event.target.classList.contains('save-button')) {
                 // @ts-ignore
@@ -274,17 +261,6 @@ export default class AdministratorController {
             }
         });
         
-
-        /*this.view.patternTable.addEventListener('click', (event) => this.cellClicked(this.view.patternTable, event)/*{
-            const cell = event.target;
-            // @ts-ignore
-            const rowIndex = cell.parentElement.rowIndex;
-            // @ts-ignore
-            const cellIndex = cell.cellIndex;
-
-            // Call the function with row and column indices
-            cellClicked(rowIndex, cellIndex);
-        });*/
     }
 
     async handlePatternFormSubmit(event) {
@@ -579,14 +555,6 @@ export default class AdministratorController {
     async savePatternRow(row) {
         const cells = row.getElementsByTagName('td');
         const rowId = row.querySelector('.save-button').getAttribute('data-id');
-        // @ts-ignore
-        /*
-        const parseCellContent = (cellContent) => {
-            return cellContent.split(',').map(item => {
-                const [id, name] = item.split(':').map(part => part.trim());
-                return { id: parseInt(id) };
-            });
-        };*/
 
         // Function to parse cell content into an array of IDs
         const parseCellContent = (cellContent) => {
@@ -600,9 +568,6 @@ export default class AdministratorController {
 
         const payload = {
             data: {
-                /*nome: //cells[0].innerText,
-                //descrizione: cells[1].innerText,
-                //contesto: cells[2].innerText,*/
                 mvcs: { set: parseCellContent(cells[3].innerText)}, // Corrected structure for many-to-many relation
                 strategias: {set: parseCellContent(cells[4].innerText)}, // Using parseCellContent to get IDs
                 privacy_by_design_principles: {set: parseCellContent(cells[5].innerText)},
@@ -776,82 +741,5 @@ export default class AdministratorController {
             alert(response);
         }
     }
-
-
-
-    /*
-        async saveRow(row) {
-            const cells = row.getElementsByTagName('td');
-            // @ts-ignore
-            const rowId = row.querySelector('.save-button').getAttribute('data-id');
-            // @ts-ignore
-            const parseCellContent = (cellContent) => {
-                return cellContent.split(',').map(item => {
-                    const [id, name] = item.split(':').map(part => part.trim());
-                    return { id: parseInt(id) };
-                });
-            };
-    
-            const payload = {
-                data: {
-                    nome: cells[0].innerText,
-                    descrizione: cells[1].innerText,
-                    contesto: cells[2].innerText,
-                    mvcs: {
-                        data : [{id :1 }, {id:2}, {id:3}]
-                    },/*
-                    strategias: { 
-                        data : //parseCellContent(cells[4].innerText)
-                    },/*
-                    privacy_by_design_principles: {
-                        data: parseCellContent(cells[5].innerText)
-                    },
-                    owasp_top_10_categories: {
-                        data: parseCellContent(cells[6].innerText)
-                    },
-                    cwe_top_25_weaknesses: {
-                        data: parseCellContent(cells[7].innerText)
-                    },
-                    articoli_gdprs: {
-                        data: parseCellContent(cells[8].innerText)
-                    },
-                    iso_9241_210_phases: {
-                        data: parseCellContent(cells[9].innerText)
-                    },
-                    examples: {
-                        data: parseCellContent(cells[10].innerText)
-                    },
-                    searchCounter: 0//parseInt(cells[11].innerText)
-                }
-    
-            };
-            console.log(payload);
-    
-            const response = await this.AdministratoModel.updatePattern(this.jwt, 27, payload);
-            console.log(response);
-    
-            if (response === true) {
-                alert('Saved');
-            }
-            else
-                alert(response);
-        }
-       */
-
-    /*
-    cellClicked(table, event) {
-        const cell = event.target;
-        // @ts-ignore
-        const rowIndex = cell.parentElement.rowIndex;
-        // @ts-ignore
-        const cellIndex = cell.cellIndex;
-        switch (table){
-            case this.view.patternTable :
-                this.updatePattern();
-        }
-    }*/
-
-
-
 
 }

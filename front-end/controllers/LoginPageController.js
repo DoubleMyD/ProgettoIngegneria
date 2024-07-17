@@ -11,12 +11,6 @@ export default class LoginPageController{
              event.preventDefault();
              await this.login(); 
         });
-/*
-        this.view.logoutButton.addEventListener('click', async (event) => {
-            event.preventDefault();
-            await this.logout(); 
-       });
-*/
     }
 
     async login(){
@@ -47,11 +41,4 @@ export default class LoginPageController{
                 window.location.href = "/logged-user";
         }
     }
-/*
-    logout(){
-        localStorage.removeItem('jwtToken');
-        alert('logout successful');
-        window.location.href = "/landing-page";
-    }
-*/
 }
