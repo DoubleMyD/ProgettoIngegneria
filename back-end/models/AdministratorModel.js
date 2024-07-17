@@ -59,7 +59,7 @@ export default class AdministratorModel{
     }
 
 
-
+/*
     static async createPattern(jwt,  dataObject){
         return await this.createData('patterns', jwt, dataObject);
     }
@@ -115,5 +115,5 @@ export default class AdministratorModel{
              return 'Error, make sure you are logged in';
          }
      }
-
+*/
 }
