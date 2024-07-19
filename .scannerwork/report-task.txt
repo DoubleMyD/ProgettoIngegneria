@@ -2,5 +2,5 @@ projectKey=ProgettoIngegneria1
 serverUrl=http://localhost:9000
 serverVersion=10.6.0.92116
 dashboardUrl=http://localhost:9000/dashboard?id=ProgettoIngegneria1
-ceTaskId=c18168c7-6589-43c8-9e4f-87d0819c67be
-ceTaskUrl=http://localhost:9000/api/ce/task?id=c18168c7-6589-43c8-9e4f-87d0819c67be
+ceTaskId=129b3f0c-d373-4b10-82c3-f596feadbf95
+ceTaskUrl=http://localhost:9000/api/ce/task?id=129b3f0c-d373-4b10-82c3-f596feadbf95

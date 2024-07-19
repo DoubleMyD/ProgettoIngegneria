@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>Landing Page</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            background-color: #f4f4f4;
+            background-color: #f9f9f9;
             color: #333;
         }
         .container {
@@ -26,53 +26,57 @@
         }
         h1 {
             font-size: 2.5em;
-            color: #5a0f0f;
+            color: #444;
+            margin-bottom: 10px;
         }
         .nav-bar {
             width: 100%;
-            background-color: #b3dcff;
+            background-color: #007BFF;
             padding: 10px 0;
             display: flex;
             justify-content: center;
             gap: 20px;
         }
         .nav-bar a {
-            color: #5a0f0f;
+            color: #fff;
             text-decoration: none;
             padding: 10px 20px;
-            background-color: #96ceff;
+            background-color: #0056b3;
             border-radius: 5px;
             font-size: 1em;
             text-align: center;
+            transition: background-color 0.3s ease;
         }
         .nav-bar a:hover {
-            background-color: #96ceff;
+            background-color: #004494;
         }
         #login-button {
             display: block;
             margin: 20px auto;
             padding: 10px 20px;
             font-size: 1em;
-            color: #5a0f0f;
-            background-color: #96ceff;
+            color: #fff;
+            background-color: #007BFF;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             text-decoration: none;
+            transition: background-color 0.3s ease;
         }
         #login-button:hover {
-            background-color: #b3dcff;
+            background-color: #0056b3;
         }
         #dropdown-container {
             width: 100%;
             margin-top: 20px;
             padding: 20px;
-            border: 2px solid #5a0f0f;
+            border: 2px solid #007BFF;
             border-radius: 10px;
+            background-color: #fff;
         }
         select {
             width: 200px;
-            padding: 5px;
+            padding: 10px;
             margin-top: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -87,13 +91,15 @@
         label {
             font-weight: bold;
             margin-top: 20px;
+            display: block;
         }
         #pattern-info, #strategy-info, #article-info, #owasp-info, #iso-info, #context-info {
-            border: 1px solid #5a0f0f;
+            border: 1px solid #007BFF;
             padding: 10px;
             margin-top: 10px;
             border-radius: 5px;
             display: none;
+            background-color: #f1f1f1;
         }
         @media (max-width: 600px) {
             select {
@@ -105,12 +111,12 @@
             align-items: center;
         }
         .checkmark-container span {
-            font-weight: bold; /* Testo in grassetto */
-            font-size: 1.2em; /* Dimensione del testo aumentata */
-            text-decoration: none; /* Rimuove la sottolineatura */
+            font-weight: bold;
+            font-size: 1.2em;
+            text-decoration: none;
         }
         label[for="pattern-select"] {
-            font-size: 1em; /* Dimensione del testo per "Choose a pattern" */
+            font-size: 1em;
         }
     </style>
 </head>
@@ -127,71 +133,69 @@
             <span>Privacy Contents</span>
         </div>
     </div>
-    <div id="pattern-content">
+    <div id="pattern-content" class="container">
         <label for="pattern-select">Choose a pattern:</label>
         <select id="pattern-select">
             <option value="">Select a pattern</option>
         </select>
-        <label for="filter-pattern">Select a filter : </label>
+        <label for="filter-pattern">Select a filter:</label>
         <select id="filter-pattern">
             <option value="">Select a filter</option>
         </select>
         <div id="pattern-info">
-           
+            <!-- Pattern information will be displayed here -->
         </div>
     </div>
-    <div id="strategy-content">
+    <div id="strategy-content" class="container">
         <label for="strategy-select">Choose a strategy:</label>
         <select id="strategy-select">
             <option value="">Select a strategy</option>
         </select>
         <div id="strategy-info">
-
+            <!-- Strategy information will be displayed here -->
         </div>
     </div>
-    <div id="article-content">
+    <div id="article-content" class="container">
         <label for="article-select">Choose an article:</label>
         <select id="article-select">
             <option value="">Select an article</option>
         </select>
         <div id="article-info">
-
+            <!-- Article information will be displayed here -->
         </div>
     </div>
-    <div id="owasp-content">
+    <div id="owasp-content" class="container">
         <label for="owasp-select">Choose an OWASP Category:</label>
         <select id="owasp-select">
-            <option value="">Select a OWASP Category</option>
+            <option value="">Select an OWASP Category</option>
         </select>
         <div id="owasp-info">
-
+            <!-- OWASP information will be displayed here -->
         </div>
     </div>
-    <div id="iso-content">
+    <div id="iso-content" class="container">
         <label for="iso-select">Choose an ISO Phase:</label>
         <select id="iso-select">
             <option value="">Select an ISO Phase</option>
         </select>
         <div id="iso-info">
-
+            <!-- ISO information will be displayed here -->
         </div>
     </div>
-    <div id="context-content">
+    <div id="context-content" class="container">
         <label for="context-select">Choose a context of use:</label>
         <select id="context-select">
             <option value="">Select a context of use</option>
         </select>
         <div id="context-info">
-           
+            <!-- Context information will be displayed here -->
         </div>
     </div>
     <script type="module">
         import LandingPageController from '././front-end/controllers/LandingPageController.js';
-       
         document.addEventListener('DOMContentLoaded', () => {
             const landController = new LandingPageController();
         });
-
     </script>
 </body>
 </html>

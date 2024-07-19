@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>index</title>
+    <title>Patterns</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,25 +12,35 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            background-color: #f4f4f4;
+            color: #333;
         }
         h1 {
             margin-top: 20px;
+            color: #007bff;
+            text-transform: uppercase;
         }
         #content {
             width: 80%;
             margin-top: 20px;
         }
         #pattern-info, #feedback-show {
-            border: 1px solid #5a0f0f;
+            border: 1px solid #007bff;
             padding: 10px;
             margin-top: 20px;
             display: none;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .comment {
             border: 1px solid #ed2e2e7a;
             padding: 5px;
             margin-top: 20px;
             display: flex;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .favorite-section {
             display: flex;
@@ -48,8 +58,9 @@
             font-size: 16px;
             margin-top: 10px;
             text-align: center;
-            text-decoration: none; /* Rimuove la sottolineatura */
-            display: inline-block; /* Mostra come blocco inline */
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease;
         }
         .button:hover {
             background-color: #0056b3;
@@ -64,17 +75,74 @@
             margin-right: 10px;
         }
         #five-patterns-section {
-            margin-top: 10px; 
+            margin-top: 10px;
+            display: flex;
+            justify-content: center; /* Centering the button */
+        }
+        select {
+            width: 200px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        option {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 20px;
+        }
+        #addComment-section {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .modal-content textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            resize: vertical;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>PATTERNS !!!!!!</h1>
+    <h1>Patterns</h1>
     <div id="pattern-content">
-        <a id='login-button-link' href="/login-page">
-            <button id="login-button" class="button">Login page</button>
-        </a>
-        <div id="pattern-buttons">
+        <div class="button-container">
+            <a id='login-button-link' href="/login-page" class="button">Login page</a>
             <a href="/landing-page" class="button">Landing page</a>
         </div>
         <div id="five-patterns-section">
@@ -87,16 +155,10 @@
                     <option value="Select a pattern">Select a pattern</option>
                 </select>
                 <button id="add-to-favorites-button" class="button">Add to favorites</button>
-                <!--
-                    <label for="filter-pattern">Select a filter:</label>
-                    <select id="filter-pattern">
-                        <option value="">Select a filter</option>
-                    </select>
-                -->
             </div>
         </div>
         <div id="pattern-info">
-           
+            <!-- Pattern information will be displayed here -->
         </div>
     </div>
     <div id="feedback-section">
@@ -112,10 +174,8 @@
         </div>
 
         <div id="feedback-show">
-            
         </div>
     </div>
-    
     <script type="module">
         import PatternController from './front-end/controllers/PatternController.js';
        
@@ -125,7 +185,6 @@
                 patternController.loadMostResearchedPatterns();
             });
         });
-    
     </script>
 </body>
 </html>
