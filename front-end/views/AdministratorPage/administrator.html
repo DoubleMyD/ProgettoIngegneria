@@ -21,50 +21,46 @@
             color: #007bff;
         }
 
-        #content {
-            width: 80%;
-            margin-top: 20px;
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        a.button {
+            margin-bottom: 20px;
         }
 
         .table-container {
+            display: flex;
+            justify-content: center;
             width: 100%;
-            margin-top: 20px;
             overflow-x: auto;
+            margin-bottom: 40px;
         }
 
         table {
-            width: 100%;
+            max-width: 100%;
             border-collapse: collapse;
             background-color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             overflow: hidden;
+            margin-bottom: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease; /* Smooth transition for table */
         }
 
         th, td {
             padding: 10px;
             text-align: left;
             max-width: 200px;
-            max-height: 150px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             border-bottom: 1px solid #ddd;
-        }
-
-        tr {
-            height: 100px;
-            transition: height 0.3s ease;
-        }
-
-        tr:hover {
-            height: 250px;
-        }
-
-        td:hover {
-            overflow: auto;
-            white-space: normal;
-            background-color: #f9f9f9;
         }
 
         th {
@@ -73,6 +69,22 @@
             position: sticky;
             top: 0;
             z-index: 1;
+        }
+
+        tr {
+            height: 50px; /* Default height */
+            transition: height 0.3s ease; /* Smooth height transition */
+        }
+
+        tr:hover {
+            height: 150px; /* Expanded height on hover */
+            background-color: #f1f1f1;
+        }
+
+        td:hover {
+            overflow: auto;
+            white-space: normal;
+            background-color: #f9f9f9;
         }
 
         .button {
@@ -106,21 +118,6 @@
             background-color: #218838;
         }
 
-        .save-button {
-            padding: 5px 10px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 3px;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 40px;
-        }
     </style>
 </head>
 
@@ -128,6 +125,7 @@
     <h1>Administrator</h1>
     <div class="container">
         <a href="/landing-page" class="button">Landing Page</a>
+
         <div id="administrator-content">
             <div id="patterns-content">
                 <div id="pattern-form"></div>
