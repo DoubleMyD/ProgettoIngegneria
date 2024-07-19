@@ -19,9 +19,7 @@ export default class LandingPageView{
         this.isoInfo = document.getElementById('iso-info');
         this.contextInfo = document.getElementById('context-info');
 
-        if(localStorage.getItem('jwtToken')){
-            this.createElement('div', document.getElementById('login-content'), 'autorizzato');
-        }
+        
     }
 
     initialize(patterns, strategies, articles, owasp, iso, contexts){
